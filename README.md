@@ -23,19 +23,19 @@ As a system containing multiple parts of components, the security service provid
 
 There are four major components required to accomplish the goal of this project. These components are the base for any cloud, but we propose to modify the working a little to ensure more security in our system.
 
-####**HIL (Hardware Isolation Layer)**
+#### **HIL (Hardware Isolation Layer)**
 
 HIL provides the capability of isolating the node in a physical layer instead of using a virtualized node. With this isolation in the cloud, it allows the nodes to share resources with different provisioning systems, including Ironic, Maas, and etc. Here, HIL can be used with little or almost no modification in the existing provisioning system, making it very dynamic in nature. [6]
 
-####**BMI (Bare Metal Imaging)**
+#### **BMI (Bare Metal Imaging)**
 
 BMI is a provisioning system that allows the hardware to boot remotely from a different datacenter. It saves the installation time of operating system and applications on the hardware by using a remote booting mechanism via PXE mechanism. [3]
 
-####**KEYLIME (Attestation)**
+#### **KEYLIME (Attestation)**
 
 Keylime is a security authentication of each physical node for user while the node is deploying, provisioning and running. Keylime builds and works on TPM ( Trusted Platform Module)  to implement its attestation procedure. It provides higher reliability and trusted nodes for tenant’s cloud environment and service.[2]
 
-####**Orchestration**
+#### **Orchestration**
 
 To simplify the deployment procedure, orchestration engine automates the entire cloud deployment procedure from idle node to node in tenant cloud network. [?] Orchestration coordinate with all previous three components and to deploy a tenant enclave with reliable and simple IssA cloud service.
 
