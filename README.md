@@ -1,9 +1,13 @@
-# **Bolted System: Secure Cloud Automated Deployment**
+**Bolted System: Secure Cloud Automated Deployment**
+=========================
 
 **Team members:**
 Vidya Anandamurali
+
 Pei Jia
+
 Yuxi Jiang
+
 Jiangnan Zou
 
 ## **Background**
