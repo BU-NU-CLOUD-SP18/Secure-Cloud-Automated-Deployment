@@ -14,6 +14,8 @@ Jiangnan Zou
 ## **Background**
 The prevalence of public cloud offerings at various level including infrastructure, platform and software as a service have drawn much of the public’s attention to their security issues. Whereas most IaaS providers may have realized the imperative nature of this public concern, they are relatively indifferent to this aspect since the access to sensitive data is only limited to their own employees. This notion, however, can not be applied to a generally-defined public cloud where customers seek the privilege to secure their own data. On the premise of this demand, bolted system is proposed to serve those customers with higher security concerns.
 
+Bolted system is designed to carve an enclave cloud network through public cloud. By integrating this system, Bolted system is able to provide customers with a secure, elastic, scalable, flexible and user-friendly enclave cloud network. Security assurance is applied not just to the firmware of the physical machine, but also to the operating system, application and generally any software that runs on the machine.
+
 As a system containing multiple parts of components, the security service provided by it is further enhanced by automating the process through orchestration. This is achieved by designing an extra orchestration engine which automatically coordinates each component to carry out a sequence of operations which finally yield a secure node for tenants.
 
 There are four major components required to accomplish the goal of this project. These components are the base for any cloud, but we propose to modify the working a little to ensure more security in our system.
