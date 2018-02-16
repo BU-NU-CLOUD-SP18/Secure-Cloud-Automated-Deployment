@@ -6,16 +6,19 @@ Yuxi Jiang
 Jiangnan Zou
 
 Project Description and Goal
+
 Bolted system is designed to carve an enclave cloud network through public cloud. By integrating this system, Bolted system is able to provide customers with a secure, elastic, scalable, flexible and user-friendly enclave cloud network. Security assurance is applied not just to the firmware of the physical machine, but also to the operating system, application and generally any software that runs on the machine. 
 
 For this project, we deliver an automated installation and configuration of the Bolted System for any provider, so that the provider would not need to install and configure the system component by component before delivering it to the tenant. This project is associated with the Mass OpenCloud (MOC) components and MIT Lincoln Lab component to provide this IaaS Service for tenant.
 
 Project Goal Includes:
+
 Provide an executable script, ansible playbook, for the provider that automatically installs and configures all components in this cloud deployment system.
 Design an automated method to install each component on tenant’s environment
 Configured each components’ connection based on the Bolted system schematics to allow interconnection and communication across each component.
 
 Background
+
 The prevalence of public cloud offerings at various level including infrastructure, platform and software as a service have drawn much of the public’s attention to their security issues. Whereas most IaaS providers may have realized the imperative nature of this public concern, they are relatively indifferent to this aspect since the access to sensitive data is only limited to their own employees. This notion, however, can not be applied to a generally-defined public cloud where customers seek the privilege to secure their own data. On the premise of this demand, bolted system is proposed to serve those customers with higher security concerns.
 
 
@@ -46,6 +49,7 @@ For Bolted system, user is a provider who needs a secure enclave public cloud to
 As a provider for sny secure service to a tenant with the help of a Bolted system, I want the system to be user friendly and easy to implement without calling the MOC technical group for installation and configuration of each component separately.
 
 Project Features and Solution
+
 For this project, the features included are the following:
 It allows the provider to install and configure the Bolted system without worrying about installation and configuration process for each component individually. 
 Another feature it that the tenant or client can choose the location for those component, and they can even move the application to a different location even after they have installed it the first time.
@@ -53,9 +57,10 @@ Another feature it that the tenant or client can choose the location for those c
 To implement this, the project uses kubernetes containers as the installation media or environment instead of a VM. The reason is because a container is convenient and portable as we think about the project requirement. 
 
 Acceptance Criteria (MVP)
+
 An ansible playbook that is executable which can install and automate the process of installation of HIL, BMI, Keylime and the orchestration engine on the provider’s cloud environment. Our system should deliver a model that facilitates communication using containers implemented on all these components so as to facilitate communication amongst them  Now, separate installation and configuration of each component is not required.
 
-Release Planning
+#Release Planning
 Release schedule would based on the bi-weekly sprint schedule.
 
 **** Release 0 (Feb 9th 2018)
