@@ -27,4 +27,6 @@ chmod +x install-centos.sh
 
 cd ~/keylime/python-keylime/
 yum install -y python-devel python-setuptools python-tornado python-m2crypto python-zmq
-sudo python setup.py install
+
+## most of the python path is python2.7
+sudo python2.7 setup.py install
