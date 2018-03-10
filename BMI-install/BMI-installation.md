@@ -74,10 +74,13 @@ $ pip install python-cephlibs
 mv bmi_config.cfg bmi_config.cfg.orig
 mv bmi_config.cfg.test bmi_config.cfg
 ```
-* Make directory /bmi under /etc and copy the config file there. Note that "_" must be removed from the file name.
+* Make directory "/bmi" under "/etc" and copy the config file there. Note that "_" must be removed from the file name.
+* Then make directory "/home/bmi" and copy the config file to "/home/bmi".
 ```
 mkdir /etc/bmi
 cp /home/username/ims/bmi_config.cfg /etc/bmi/bmiconfig.cfg
+mkdir /home/bmi
+cp /home/username/ims/bmi_config.cfg /home/bmi
 ```
 
 That's it. Installation is done!
