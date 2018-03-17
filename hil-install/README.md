@@ -1,4 +1,6 @@
-Installation procedure for HIL:
+# HIL
+
+## Manual installation procedure for HIL:
 
 Prerequisites: Github account and forked the HIL repository:
 Install the dependencies:
