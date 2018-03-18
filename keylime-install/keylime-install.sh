@@ -1,14 +1,18 @@
 #!/bin/bash
 
-# clone two repo
+cwd=$(pwd)
+cd
+
 git clone https://github.com/mit-ll/python-keylime.git
-git clone https://github.com/BU-NU-CLOUD-SP18/Secure-Cloud-Automated-Deployment.git
 
-# update setup.py in keylime
-cp Secure-Cloud-Automated-Deployment/keylime-install/setup.py python-keylime/setup.py 
 
-cd python-keylime
+cp $cwd/setup.py ~/python-keylime/setup.py 
+
+
+cd ~/python-keylime/
 
 # install opetion for keylime on virtual machine
-sudo installer.sh -s
+sudo ./installer.sh -s
 
+cd ~/python-keylime/test/
+sudo ./run_tests.sh
