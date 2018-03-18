@@ -16,6 +16,11 @@ git clone https://github.com/**username**/hil.git
 cd hil
 ```
 
+set hil end point to public port 5000
+```
+export HIL_ENDPOINT=http://127.0.0.1:5000
+```
+
 ( Go to the repository and the fork place, the in the clone or download part- if we click, a link will come, copy paste that link.. it ends with a hil.git)
 Creating a virtual environment for Python:
 ```
