@@ -1,23 +1,23 @@
-Bolted System: Project Summary
+# Bolted System: Project Summary
 
 Vidya Anandamurali
 Pei Jia
 Yuxi Jiang
 Jiangnan Zou
 
-Project Description and Goal
+## Project Description and Goal
 
 Bolted system is designed to carve an enclave cloud network through public cloud. By integrating this system, Bolted system is able to provide customers with a secure, elastic, scalable, flexible and user-friendly enclave cloud network. Security assurance is applied not just to the firmware of the physical machine, but also to the operating system, application and generally any software that runs on the machine. 
 
 For this project, we deliver an automated installation and configuration of the Bolted System for any provider, so that the provider would not need to install and configure the system component by component before delivering it to the tenant. This project is associated with the Mass OpenCloud (MOC) components and MIT Lincoln Lab component to provide this IaaS Service for tenant.
 
-Project Goal Includes:
+## Project Goal Includes:
 
 Provide an executable script, ansible playbook, for the provider that automatically installs and configures all components in this cloud deployment system.
 Design an automated method to install each component on tenant’s environment
 Configured each components’ connection based on the Bolted system schematics to allow interconnection and communication across each component.
 
-Background
+## Background
 
 The prevalence of public cloud offerings at various level including infrastructure, platform and software as a service have drawn much of the public’s attention to their security issues. Whereas most IaaS providers may have realized the imperative nature of this public concern, they are relatively indifferent to this aspect since the access to sensitive data is only limited to their own employees. This notion, however, can not be applied to a generally-defined public cloud where customers seek the privilege to secure their own data. On the premise of this demand, bolted system is proposed to serve those customers with higher security concerns.
 
@@ -60,32 +60,32 @@ Acceptance Criteria (MVP)
 
 An ansible playbook that is executable which can install and automate the process of installation of HIL, BMI, Keylime and the orchestration engine on the provider’s cloud environment. Our system should deliver a model that facilitates communication using containers implemented on all these components so as to facilitate communication amongst them  Now, separate installation and configuration of each component is not required.
 
-#Release Planning
+## Release Planning
 Release schedule would based on the bi-weekly sprint schedule.
 
-**** Release 0 (Feb 9th 2018)
+#### Release 0 (Feb 9th 2018)
 Project description and proposal
  
-**** Release 1 (Feb 23rd 2018)
+#### Release 1 (Feb 23rd 2018)
 Learn ansible by doing a small project. Provide ansible script that can automate or semi-automate the install procedure of each component individually
 
-**** Release 2 (Mar 9th 2018)
+#### Release 2 (Mar 9th 2018)
 Able to install all components in MOC nodes using the ansible script
 Basic configuration method for connection and communication between each component on MOC
 
-**** Release 3 (Mar 23rd 2018)
+#### Release 3 (Mar 23rd 2018)
 Create containers for each of the components in the system using kubernetes and integrating them.
 
-**** Release 4 (April 6th 2018)
+#### Release 4 (April 6th 2018)
 Facilitate communication between the containers using the ansible playbook. Four such playbooks must be made, One for HIL, Keylime and Orchestration engine and one for the whole system together.
 
-**** Release 5 (April 20th 2018)
+#### Release 5 (April 20th 2018)
 Configuration and testing procedures of the entire system.
 
-**** Release 6 (May 1st 2018)
+#### Release 6 (May 1st 2018)
 Enhanced version of the project that facilitates communication across various components installed in different machines, thereby automating the process.
 
-References
+## References
 [1] Jason Hennessey , Sahil Tikale , Ata Turk , Emine Ugur Kaynar , Chris Hill , Peter Desnoyers , Orran Krieger, HIL: Designing an Exokernel for the Data Center, Proceedings of the Seventh ACM Symposium on Cloud Computing, October 05-07, 2016, Santa Clara, CA, USA
 [2] Nabil Schear , Patrick T. Cable, II , Thomas M. Moyer , Bryan Richard , Robert Rudd, Bootstrapping and maintaining trust in the cloud, Proceedings of the 32nd Annual Conference on Computer Security Applications, December 05-08, 2016, Los Angeles, California, USA
 [3] Ata Turk, Ravi S. Gudimetla, Emine Ugur Kaynar, Jason Hennessey, Sahil Tikale, Peter Desnoyers, and Orran Krieger. An experiment on bare-metal bigdata provisioning. In 8th USENIX Workshop on Hot Topics in Cloud Computing (HotCloud 16), Denver, CO, 2016. USENIX Association.
