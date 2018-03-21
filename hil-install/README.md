@@ -27,8 +27,8 @@ Creating a virtual environment for Python:
 virtualenv .venv
 source .venv/bin/activate
 easy_install -U setuptools
-pip3 install --upgrade setuptools
-pip install -e .[tests]
+pip install --upgrade setuptools
+pip install -e .
 ```
 
 Configure HIL:
@@ -52,7 +52,6 @@ From a separate terminal window: (Can do it in the same terminal itself)
 cd ~/hil/
 virtualenv .venv
 source .venv/bin/activate
-pip install -e .
 ```
 
 Make sure the server is running in the background by using this method:
