@@ -29,9 +29,9 @@ cd ~/
 git clone https://github.com/CCI-MOC/ims
 sudo python setup.py install
 sudo pip install python-cephlibs
-mv bmi_config.cfg bmi_config.cfg.orig
-mv bmi_config.cfg.test bmi_config.cfg
-mkdir /etc/bmi
-cp /home/username/ims/bmi_config.cfg /etc/bmi/bmiconfig.cfg
-mkdir /home/bmi
-cp /home/username/ims/bmi_config.cfg /home/bmi
+sudo mv bmi_config.cfg bmi_config.cfg.orig
+sudo mv bmi_config.cfg.test bmi_config.cfg
+sudo mkdir /etc/bmi
+sudo cp /home/username/ims/bmi_config.cfg /etc/bmi/bmiconfig.cfg
+sudo mkdir /home/bmi
+sudo cp /home/username/ims/bmi_config.cfg /home/bmi
