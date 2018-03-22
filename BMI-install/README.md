@@ -32,6 +32,10 @@ You can install it on CentOS with the following set of commands:
 ```
 sudo yum install -y epel-release
 sudo yum install -y scsi-target-utils
+sudo yum -y install firewalld
+sudo systemctl enable firewalld
+sudo systemctl restart firewalld
+
 ```
 Configure firewall to enable network connections for ISCSI service. (Available on CentOS 7)
 ```
@@ -67,7 +71,7 @@ $ git clone https://github.com/CCI-MOC/ims
 * Navigate to directory "ims" and run setup.py to install BMI, then install python-cephlibs
 ```
 $ sudo python setup.py install
-$ pip install python-cephlibs
+$ sudo pip install python-cephlibs
 ```
 * Make sure you are under directory "ims", backup the customized config file and rename the config file for testing as the current config file.
 ```
