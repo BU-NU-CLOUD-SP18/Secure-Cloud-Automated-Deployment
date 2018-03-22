@@ -14,6 +14,7 @@ export HIL_ENDPOINT=http://127.0.0.1:5000
 virtualenv .venv
 source .venv/bin/activate
 easy_install -U setuptools
+cd ~/hil
 pip install --upgrade setuptools
 pip install -e .
 
