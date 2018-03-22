@@ -67,14 +67,16 @@ Release schedule would based on the bi-weekly sprint schedule.
 Project description and proposal
  
 #### Release 1 (Feb 23rd 2018)
-Learn ansible by doing a small project. Provide ansible script that can automate or semi-automate the install procedure of each component individually
+Reading papers on BMI, HIL, and Keylime. Make clear the goal and come up the user story and minimun viable product.
+Make a project plan based on bi-week schedual.
 
 #### Release 2 (Mar 9th 2018)
-Able to install all components in MOC nodes using the ansible script
-Basic configuration method for connection and communication between each component on MOC
+Install HIL, keylime, BMI on the virtual machine (CentOS/VMware). Install them through command line.
+Learning ansible by doing a small project. Provide ansible script that can automate or semi-automate the install procedure of each component individually.
 
 #### Release 3 (Mar 23rd 2018)
-Create containers for each of the components in the system using kubernetes and integrating them.
+Learn kaizen through the tutorials and set up all the components.
+Learn how to use Docker and install HIL on Docker container.
 
 #### Release 4 (April 6th 2018)
 Facilitate communication between the containers using the ansible playbook. Four such playbooks must be made, One for HIL, Keylime and Orchestration engine and one for the whole system together.
