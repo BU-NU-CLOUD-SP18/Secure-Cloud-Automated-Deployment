@@ -2,17 +2,17 @@ FROM centos:centos7
 
 MAINTAINER Jalon Zou
 
-WORKDIR /home/zjn
+WORKDIR /root
 
-ADD . /home/zjn
+ADD . /root
 
-RUN yum -y install wget
+RUN yum -y install wget openssl
 
 RUN cd python-keylime && \
-./installer.sh -s
+./installer.sh
 
-WORKDIR /home/zjn/python-keylime/test
+WORKDIR /root/python-keylime/test
 
 CMD ["./run_tests.sh"]
 
-EXPOSE 4000
+EXPOSE 8992
