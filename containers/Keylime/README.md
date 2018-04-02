@@ -6,6 +6,14 @@ Since Keylime needs three different services to perform the monitoring functiona
 
 Keylime Registrar and Keylime Verifier needs to be run first before running Keylime Client Node, since Keylime Client Node needs to connect to Registrar and Verifier to finish its registration process.
 
+#### Build container 
+
+
+Use this Docker file to  build a docker container image with name keylime into the current path
+```
+sudo docker build -t keylime .
+```
+
 #### Local Test
 
 This test is test the communication between each componentof Keylime.
