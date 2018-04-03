@@ -64,6 +64,7 @@ An ansible playbook that is executable which can install and automate the proces
 Release schedule would based on the bi-weekly sprint schedule.
 
 > Release 0 (Feb 9th 2018)
+
 Project description and proposal
  
 > Release 1 (Feb 23rd 2018)
@@ -102,12 +103,15 @@ Reading the following papers:
     - Create HIL, BMI and Keylime image using Docker draft.
 
 > Release 4 (April 6th 2018)
+
 Facilitate communication between the containers using the ansible playbook. Four such playbooks must be made, One for HIL, Keylime and Orchestration engine and one for the whole system together.
 
 > Release 5 (April 20th 2018)
+
 Configuration and testing procedures of the entire system.
 
 > Release 6 (May 1st 2018)
+
 Enhanced version of the project that facilitates communication across various components installed in different machines, thereby automating the process.
 
 ## References
