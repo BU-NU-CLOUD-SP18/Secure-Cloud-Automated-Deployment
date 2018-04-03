@@ -89,10 +89,15 @@ Enhanced version of the project that facilitates communication across various co
 
 ## References
 [1] Jason Hennessey , Sahil Tikale , Ata Turk , Emine Ugur Kaynar , Chris Hill , Peter Desnoyers , Orran Krieger, HIL: Designing an Exokernel for the Data Center, Proceedings of the Seventh ACM Symposium on Cloud Computing, October 05-07, 2016, Santa Clara, CA, USA
+
 [2] Nabil Schear , Patrick T. Cable, II , Thomas M. Moyer , Bryan Richard , Robert Rudd, Bootstrapping and maintaining trust in the cloud, Proceedings of the 32nd Annual Conference on Computer Security Applications, December 05-08, 2016, Los Angeles, California, USA
+
 [3] Ata Turk, Ravi S. Gudimetla, Emine Ugur Kaynar, Jason Hennessey, Sahil Tikale, Peter Desnoyers, and Orran Krieger. An experiment on bare-metal bigdata provisioning. In 8th USENIX Workshop on Hot Topics in Cloud Computing (HotCloud 16), Denver, CO, 2016. USENIX Association.
+
 [4] Apoorve Mohan, Ata Turk, Ravi S. Gudimetla, Sahil Tikale, Jason Hennesey, Ugur Kaynar, Gene Cooperman, Peter Desnoyers,Orran Krieger, M2: Malleable Metal as a Service, arXiv:1801.00540 [cs.DC], Jan, 2018, USA.
+
 [5]  Yushi Omote, Takahiro Shinagawa, and Kazuhiko Kato.  Improving agility and elasticity in bare-metal clouds.In ASP- LOS, 2015.
+
 [6] Jason Hennessey, Sahil Tikale, Ata Turk, Emine Ugur Kaynar, Chris Hill, Peter Desnoyers, and Orran Krieger. 2016. HIL: Designing an Exokernel for the Data Center. In Proceedings of the Seventh ACM Symposium on Cloud Computing (SoCC '16), Marcos K. Aguilera, Brian Cooper, and Yanlei Diao (Eds.). ACM, New York, NY, USA, 155-168. 
 
 
