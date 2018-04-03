@@ -67,12 +67,27 @@ Release schedule would based on the bi-weekly sprint schedule.
 Project description and proposal
  
 #### Release 1 (Feb 23rd 2018)
-Reading papers on BMI, HIL, and Keylime. Make clear the goal and come up the user story and minimun viable product.
-Make a project plan based on bi-week schedual.
+> Goal and Plan
 
+Reading the following papers:
+ - Bolted: Security as a Service
+ - HIL: Designing an Exokernel for the Data Center
+ - M2: Malleable Metal as a Service
+ - Hardware as a server - enabling dynamic, user-level bare metal provisioning of pools of data center resources
+ 
 #### Release 2 (Mar 9th 2018)
-Install HIL, keylime, BMI on the virtual machine (CentOS/VMware). Install them through command line.
-Learning ansible by doing a small project. Provide ansible script that can automate or semi-automate the install procedure of each component individually.
+> Goal and Plan
+- Installation
+    - Install CentOS 7 on VMware.
+    - Install HIL, BMI, Keylime on CentOS 7 through command line.
+    - Provide bash script that can semi-automate the installation procedure of each component individually.
+    - Install and upgrate Python on CentOS.
+    - Install Docker on Virtual machine.
+
+- Learning and doing research
+    - Learning Ansible by doing tutorial and reading playbook. 
+    - Learning Docker on Docker.io and finish the tutorial. 
+    - Learning Kubernetes.
 
 #### Release 3 (Mar 23rd 2018)
 Learn kaizen through the tutorials and set up all the components.
