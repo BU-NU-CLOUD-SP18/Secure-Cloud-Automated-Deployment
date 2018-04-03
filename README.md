@@ -90,8 +90,18 @@ Reading the following papers:
     - Learning Kubernetes.
 
 #### Release 3 (Mar 23rd 2018)
-Learn kaizen through the tutorials and set up all the components.
-Learn how to use Docker and install HIL on Docker container.
+> Goal and Plan
+
+- Learning Kaizen
+    - Finish the MOC OpenStack tutoril on massopen.cloud.
+    - Create a new network on OpenStack plantform.
+    - Create a router on the network and add interface. Set the gateway to connect the network to public network.
+    - Generate the public key and create key pairs.
+    - Add virtual machine to the network.
+
+- Ceate Docker images
+    - Learn Docker by going through the tutorials
+    - Create HIL, BMI and Keylime image using Docker draft.
 
 #### Release 4 (April 6th 2018)
 Facilitate communication between the containers using the ansible playbook. Four such playbooks must be made, One for HIL, Keylime and Orchestration engine and one for the whole system together.
