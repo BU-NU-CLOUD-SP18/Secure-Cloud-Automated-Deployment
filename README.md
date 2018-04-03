@@ -63,11 +63,10 @@ An ansible playbook that is executable which can install and automate the proces
 ## Release Planning
 Release schedule would based on the bi-weekly sprint schedule.
 
-#### Release 0 (Feb 9th 2018)
+> Release 0 (Feb 9th 2018)
 Project description and proposal
  
-#### Release 1 (Feb 23rd 2018)
-> Goal and Plan
+> Release 1 (Feb 23rd 2018)
 
 Reading the following papers:
  - Bolted: Security as a Service
@@ -75,8 +74,8 @@ Reading the following papers:
  - M2: Malleable Metal as a Service
  - Hardware as a server - enabling dynamic, user-level bare metal provisioning of pools of data center resources
  
-#### Release 2 (Mar 9th 2018)
-> Goal and Plan
+> Release 2 (Mar 9th 2018)
+
 - Installation
     - Install CentOS 7 on VMware.
     - Install HIL, BMI, Keylime on CentOS 7 through command line.
@@ -89,8 +88,7 @@ Reading the following papers:
     - Learning Docker on Docker.io and finish the tutorial. 
     - Learning Kubernetes.
 
-#### Release 3 (Mar 23rd 2018)
-> Goal and Plan
+> Release 3 (Mar 23rd 2018)
 
 - Learning Kaizen
     - Finish the MOC OpenStack tutoril on massopen.cloud.
@@ -103,13 +101,13 @@ Reading the following papers:
     - Learn Docker by going through the tutorials
     - Create HIL, BMI and Keylime image using Docker draft.
 
-#### Release 4 (April 6th 2018)
+> Release 4 (April 6th 2018)
 Facilitate communication between the containers using the ansible playbook. Four such playbooks must be made, One for HIL, Keylime and Orchestration engine and one for the whole system together.
 
-#### Release 5 (April 20th 2018)
+> Release 5 (April 20th 2018)
 Configuration and testing procedures of the entire system.
 
-#### Release 6 (May 1st 2018)
+> Release 6 (May 1st 2018)
 Enhanced version of the project that facilitates communication across various components installed in different machines, thereby automating the process.
 
 ## References
