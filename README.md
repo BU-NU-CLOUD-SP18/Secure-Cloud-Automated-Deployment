@@ -104,7 +104,25 @@ Reading the following papers:
 
 > Release 4 (April 6th 2018)
 
-Facilitate communication between the containers using the ansible playbook. Four such playbooks must be made, One for HIL, Keylime and Orchestration engine and one for the whole system together.
+
+- Containerization of Keylime
+    - Build Keylime image.
+    - Test Keylime by running the latest Keylime image in a docker container.
+    - Test the communication between each component of Keylime inside docker.
+
+- Containerization of HIL
+    - Build HIL image using Docker.
+    - Test HIL by running the HIL image in a docker container.
+    - Test the communication between each component of keylime inside docker.
+
+- Containerization of BMI
+    - Build BMI image.
+    - Test BMI by runing the BMI image in a docker container.
+    - Test the communication between each component of BMI inside docker.
+
+- Learning and doing research
+    - Learning Kubernetes by watching tutorial.
+    - Learning Ansible.
 
 > Release 5 (April 20th 2018)
 
