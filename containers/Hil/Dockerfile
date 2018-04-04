@@ -7,7 +7,7 @@ RUN adduser zjn && \
     echo "zjn ALL=(root) NOPASSWD:ALL" | tee -a /etc/sudoers.d/zjn && \
     chmod 777 /
 
-USER zjn
+#USER zjn
 
 WORKDIR /home/zjn
 
@@ -32,6 +32,8 @@ RUN python2.7 --version
 RUN cat depreqs.txt | xargs yum -y install
 #RUN yum -y install wget
 
+ENV HIL_ENDPOINT http://127.0.0.1:5000
+
 RUN curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py" \
 && python2.7 get-pip.py \
 && pip install setuptools --upgrade \
@@ -44,7 +46,9 @@ RUN curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py" \
 && pip install -e . \
 && cp examples/hil.cfg.dev-no-hardware hil.cfg
 
-#User zjn
+User zjn
+
+ENV HIL_ENDPOINT http://127.0.0.1:5000
 
 WORKDIR /home/zjn/hil
 
