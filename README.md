@@ -124,6 +124,8 @@ Reading the following papers:
     - Learning Kubernetes by watching tutorial.
     - Learning Ansible.
 
+- Integrating the components together to facilitate communication amongst Keylime, HIL and BMI.
+
 > Release 5 (April 20th 2018)
 
 Configuration and testing procedures of the entire system.
