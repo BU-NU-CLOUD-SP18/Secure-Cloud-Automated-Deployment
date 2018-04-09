@@ -58,3 +58,21 @@ hil-admin db create
 hil-admin create-admin-user ${HIL_ADMIN_USER} ${HIL_ADMIN_PASSWORD}
 ```
 
+All HIL commands in these instructions should be run in this directory:
+```
+cd /var/lib/hil
+```
+
+#### For systems that do not support systemd:
+Some systems like the LTS version of Ubuntu, Ubuntu 14.04 does not come with systemd pre-installed. It uses “Upstart” an equivalent of systemd to manage its daemons/processes.
+
+For such systems, the networking server may be started as the HIL user by running:
+
+```
+$ hil-admin serve-networks &
+```
+To make this happen on boot, add the following to /etc/rc.local:
+
+```
+($ cd /var/lib/hil && su hil -c 'hil-admin serve-networks') &
+```
