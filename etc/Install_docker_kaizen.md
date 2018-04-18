@@ -14,7 +14,7 @@ cp /etc/sysconfig/docker /etc/sysconfig/docker.org
 
 Change line ```OPTIONS='--selinux-disabled --log-driver=journald'``` to ```OPTIONS='--log-driver=journald'```
 ```
-sed 's/OPTIONS='--selinux-disabled --log-driver=journald'/OPTIONS='--log-driver=journald'/'/etc/sysconfig/docker
+sed 's/OPTIONS='--selinux-disabled --log-driver=journald'/OPTIONS='--log-driver=journald'/' /etc/sysconfig/docker
 ```
 
 Then un-comment # setsebool -P docker_transition_unconfined 1 to setsebool -P docker_transition_unconfined 1
