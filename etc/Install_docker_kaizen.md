@@ -2,6 +2,11 @@ These procedures will fix the problem and start the docker engine on kaizen.
 
 RUN AS ROOT !!!
 
+Install docker on CentOS
+```
+yum install docker -y
+```
+
 delete the folder docker under /var/lib
 ```
 rm -rf /var/lib/docker
