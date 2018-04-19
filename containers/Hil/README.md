@@ -68,74 +68,112 @@ uri = postgresql://<usern>:<password>@<address>:5432/<dbname>
 ```
 
 ## Hil image
+Build an image from ```Apache/Centos``` dockerfile. Dockerfile can be found through this link [Apache/Centos](https://github.com/CentOS/CentOS-Dockerfiles/tree/master/httpd/centos7), or under this directory [Apache/Centos](httpd_container). Build the image using the following command.
+```
+$ docker build --rm -t httpd .
+```
+Run the image by exposing container port ```8080``` to docker port ```8080```
+```
+docker run -d --name hil_apache -p 8080:8080 httpd
+```
+Once the container is running, open a shell for the container to do further modification.
+```
+$ docker exec -it hil_apache bash
+```
+Once inside the container, follow the following procedures to install hil, hil apache server and hil network server:
+
 HIL requires a number of packages, install Dependencies for hil:
 ```
 $ yum install epel-release bridge-utils  gcc  httpd  ipmitool libvirt \
 libxml2-devel  libxslt-devel  mod_wsgi net-tools python-pip python-psycopg2 \
 python-virtinst python-virtualenv qemu-kvm telnet vconfig virt-install git -y
 ```
-Environment Variable 
+Set Environment Variable, make a file call ```hil_env``` under ```/root``` directory has the following environment variables.
 ```
 export HIL_USER=hil
 export HIL_ADMIN=hil
 export HIL_ADMIN_PASSWORD=secret
 export HIL_HOME_DIR=/var/lib/hil
 ```
-
+Create a system user called ```hil``` with home directory at ```/var/lib/hil```
 ```
-useradd --system ${HIL_USER} -d /var/lib/hil -m -r
+$ sudo useradd --system ${HIL_USER} -d /var/lib/hil -m -r
 ```
-
+Switch to root user to install hil at this moment
 ```
-cd /root
-git clone https://github.com/CCI-MOC/hil
-cd hil
-python setup.py install
+$ sudo su -
 ```
-
-
-under ```/root/hil``` directory
+Following the following steps to install hil
 ```
-cp examples/hil.cfg /etc/hil.cfg
-chown ${HIL_USER}:${HIL_USER} /etc/hil.cfg
-chmod 400 /etc/hil.cfg
+$ cd /root
+$ git clone https://github.com/CCI-MOC/hil
+$ cd hil
+$ python setup.py install
 ```
-(run following command as ${HIL_USER} from ${HIL_HOME_DIR}
+under ```/root/hil``` directory, copy the ```hil.cfg``` file under ```/etc``` directory. Change the owner of the file to hil with group hil and change the file type to read only.
+```
+$ cd /root
+$ git clone https://github.com/BU-NU-CLOUD-SP18/Secure-Cloud-Automated-Deployment.git
+$ cp /root/Secure-Cloud-Automated-Deployment/container/hil/hil.cfg /etc/hil.cfg
+$ chown ${HIL_USER}:${HIL_USER} /etc/hil.cfg
+$ chmod 400 /etc/hil.cfg
+```
+Switch to user ```hil``` and create a link to the ```/etc/hil.cfg`` file
 ``` 
-su ${HIL_USER}
-ln -s /etc/hil.cfg .
+$ su - ${HIL_USER}
+$ ln -s /etc/hil.cfg .
 ```
-
-copy this link to ```hil.cfg``` file, comment out the sqlite uri.
-
+copy the link from PostgreSQL to ```hil.cfg``` file, comment out the sqlite uri. Here is an examole link.
 ```
 uri = postgresql://hil:12345@172.18.0.20:5432/hil
 ```
-
-Switch to hil user
+Switch to hil user and create a database, then create an admin user. 
 ```
-hil-admin db create
+$ sudo su - hil
+$ hil-admin db create
+$ hil-admin create-admin-user ${HIL_ADMIN_USER} ${HIL_ADMIN_PASSWORD}
 ```
-
-```
-hil-admin create-admin-user ${HIL_ADMIN_USER} ${HIL_ADMIN_PASSWORD}
-```
-
 All HIL commands in these instructions should be run in this directory:
 ```
-cd /var/lib/hil
+$ cd /var/lib/hil
+```
+##### Install Hil Apache Wsgi framework server
+HIL consists of two services: an API server and a networking server. The former is a WSGI application, which we recommend running with Apache’s ```mod_wsgi```. Create a file ```/etc/httpd/conf.d/wsgi.conf```, with the contents:
+```
+LoadModule wsgi_module modules/mod_wsgi.so
+WSGISocketPrefix run/wsgi
+
+<VirtualHost 127.0.0.1:80 [::1]:80>
+  ServerName 127.0.0.1
+  AllowEncodedSlashes On
+  WSGIPassAuthorization On
+  WSGIDaemonProcess hil user=hil group=hil threads=2
+  WSGIScriptAlias / /var/www/hil/hil.wsgi
+  <Directory /var/www/hil>
+    WSGIProcessGroup hil
+    WSGIApplicationGroup %{GLOBAL}
+    Order deny,allow
+    Allow from all
+  </Directory>
+</VirtualHost>
+```
+If you haven’t already, create the directory that will contain the HIL WSGI module:
+```
+$ sudo mkdir /var/www/hil/
+```
+Copy the file hil.wsgi from the top of the hil source tree to the location indicated by the WSGIScriptAlias option. The virtual host and server name should be set according to the hostname (and port) by which clients will access the api. Then, restart Apache:
+```
+$ sudo cp /root/hil/hil.wsgi /var/www/hil/hil.wsgi
 ```
 
-#### For systems that do not support systemd:
-Some systems like the LTS version of Ubuntu, Ubuntu 14.04 does not come with systemd pre-installed. It uses “Upstart” an equivalent of systemd to manage its daemons/processes.
-
-For such systems, the networking server may be started as the HIL user by running:
-
+##### Start Hil network server
+This container doesn't support systemd. For such systems, the networking server may be started as the HIL user by running:
 ```
 $ hil-admin serve-networks &
 ```
 To make this happen on boot, add the following to /etc/rc.local:
-
 ```
 ($ cd /var/lib/hil && su hil -c 'hil-admin serve-networks') &
 ```
+
+Once Everything is setup, restart the container.
