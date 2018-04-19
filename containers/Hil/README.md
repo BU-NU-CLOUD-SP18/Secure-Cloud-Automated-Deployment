@@ -1,10 +1,10 @@
 # Hil Image
 HiL contains two images to perform the hil service. The first image is an Apache image that has Hil server install, the other image is a PostgreSQL image that has PostgreSQL server as hil database. 
 
-## Manual create image
+# Manual create image
 This tutorial walk through the procedure create container image for both hil images. The frist tutorial shows the procedure of creating PostgreSQL database for hil, the second tutorial shows the procedure of creating hil Apache server and network server.
 
-#### PostgreSQL image
+## PostgreSQL image
 Download the PostgreSQL image from docker hub
 ```
 $ docker pull postgres:latest
@@ -67,7 +67,7 @@ Put following string in ```hil.cfg``` under section ```[database]```.It follows 
 uri = postgresql://<usern>:<password>@<address>:5432/<dbname>
 ```
 
-#### Hil image
+## Hil image
 ```
 yum install epel-release bridge-utils  gcc  httpd  ipmitool libvirt \
 libxml2-devel  libxslt-devel  mod_wsgi net-tools python-pip python-psycopg2 \
