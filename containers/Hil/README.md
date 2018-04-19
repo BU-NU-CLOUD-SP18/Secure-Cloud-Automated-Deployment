@@ -68,18 +68,13 @@ uri = postgresql://<usern>:<password>@<address>:5432/<dbname>
 ```
 
 ## Hil image
+HIL requires a number of packages, install Dependencies for hil:
 ```
-yum install epel-release bridge-utils  gcc  httpd  ipmitool libvirt \
+$ yum install epel-release bridge-utils  gcc  httpd  ipmitool libvirt \
 libxml2-devel  libxslt-devel  mod_wsgi net-tools python-pip python-psycopg2 \
-python-virtinst python-virtualenv qemu-kvm telnet vconfig virt-install -y
+python-virtinst python-virtualenv qemu-kvm telnet vconfig virt-install git -y
 ```
-
-```
-yum install git -y
-```
-
-Add the following to ```/etc/bashrc```
-
+Environment Variable 
 ```
 export HIL_USER=hil
 export HIL_ADMIN=hil
