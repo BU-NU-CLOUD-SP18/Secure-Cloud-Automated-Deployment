@@ -27,7 +27,7 @@ sed -i 's/--selinux-enabled //' /etc/sysconfig/docker
 
 Then un-comment # setsebool -P docker_transition_unconfined 1 to setsebool -P docker_transition_unconfined 1
 ```
-sed 's/# setsebool -P docker_transition_unconfined 1/ setsebool -P docker_transition_unconfined 1/' /etc/sysconfig/docker
+sed -i 's/# setsebool -P docker_transition_unconfined 1/setsebool -P docker_transition_unconfined 1/' /etc/sysconfig/docker
 ```
 
 
