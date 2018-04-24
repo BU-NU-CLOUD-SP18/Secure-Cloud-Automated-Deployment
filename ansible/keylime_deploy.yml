@@ -1,0 +1,23 @@
+---
+- hosts: keylime
+  sudo: yes
+  tasks:
+
+    - name: clone repo to directory
+      become: yes
+      become_user: root
+      git:
+        repo: https://github.com/leonjia0112/bolted.git
+        dest: /home/bolted
+        clone: yes
+  
+#    - name: build keylime docker image
+#      command: docker build -t keylime /home/bolted/containers/keylime        
+    
+    - name: run keylime container with registrar and verifier
+      command: docker run -itd --name keylime_cv keylime:latest bash "run.sh"
+
+    - name: print message
+      debug: 
+        msg:  "finished {{ inventory_hostname }}"
+...
