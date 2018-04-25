@@ -60,7 +60,7 @@ sudo docker run -it --name keylime_cv_test -p 8881:8881 -p 8890:8890 -p 8891:889
 ```
 Once the keylime verifier and registrar host is running, start and new keylime client node on VM with address ```10.0.0.13``` to connect to the keylime verifier and registrar host.
 ```
-sudo docker run -it keylime:latest bash '-c' "init_tpm_server; tpm_serverd; python ../keylime/cloud_node.py"
+sudo docker run -it -p 9002:9002 keylime:latest bash '-c' "init_tpm_server; tpm_serverd; python ../keylime/cloud_node.py"
 ```
 The test result should behave the same way as the docker cocal connection test result with UUID matched between two containers.
 
