@@ -129,6 +129,8 @@ Reading the following papers:
 
 > Release 5 (April 20th 2018)
 Created YAML files to put two containers of keylime into a pod, but realised that we can stop using Kubernetes and started off by using Ansible.
+Resolve all issues with the docker files created.
+Writing Ansible scripts to facilitate communication.
 
 Configuration and testing procedures of the entire system.
 
