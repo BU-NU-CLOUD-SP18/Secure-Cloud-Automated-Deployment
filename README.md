@@ -123,10 +123,12 @@ Reading the following papers:
 - Learning and doing research
     - Learning Kubernetes by watching tutorial.
     - Learning Ansible.
+    - Installation of kubernetes and resolved many issues pertaining to it.
 
 - Integrating the components together to facilitate communication amongst Keylime, HIL and BMI.
 
 > Release 5 (April 20th 2018)
+Created YAML files to put two containers of keylime into a pod, but realised that we can stop using Kubernetes and started off by using Ansible.
 
 Configuration and testing procedures of the entire system.
 
