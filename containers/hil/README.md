@@ -74,7 +74,7 @@ $ docker build --rm -t httpd .
 ```
 Run the image by exposing container port ```8080``` to docker port ```8080```
 ```
-$ docker run -itd --net mynet --ip 172.18.0.20 -p 8080:80 --name hil_apache -p 8080:8080 httpd:latest
+$ docker run -itd --net mynet --ip 172.18.0.21 -p 8080:80 --name hil_apache -p 8080:8080 httpd:latest
 ```
 Once the container is running, open a shell for the container to do further modification.
 ```
