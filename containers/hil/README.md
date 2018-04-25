@@ -11,7 +11,7 @@ $ docker pull postgres:latest
 ```
 Then run the PostgreSQL image, this container automated expose port ```5432``` for public access
 ```
-$ docker run -itd --name hil_postgres postgres:latest
+$ docker run -itd --net mynet --ip 172.18.0.20 --name hil_postgres postgres:latest
 ```
 Once the container is running, open a shell for the container to do further modification.
 ```
