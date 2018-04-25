@@ -6,7 +6,7 @@
       become: yes
       become_user: root
       git:
-	repo: https://github.com/leonjia0112/bolted.git
+        repo: https://github.com/leonjia0112/bolted.git
         dest: /home/bolted
         clone: yes
 
@@ -18,14 +18,14 @@
       become_user: root
       script: ip_setup.sh {{ inventory_hostname }}
       args:
-	chdir: /home/bolted/containers/keylime
+        chdir: /home/bolted/containers/keylime
 
 #    - name: run keylime container with registrar and verifier
 #      command: docker run -itd --name keylime_cv keylime:latest bash "run.sh"
 
     - name: print message
       debug:
-	msg:  "finished {{ inventory_hostname }}"
+        msg:  "finished {{ inventory_hostname }}"
 ...
 
 
