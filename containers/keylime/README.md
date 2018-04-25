@@ -56,7 +56,7 @@ $ sudo docker build -t keylime .
 ```
 Once both image is built on two VMs, using the following command to run a docker container on VM with address ```10.0.0.9``` as keylime verifier and registrar host.
 ```
-sudo docker run -it --name keylime_cv_test -p 8890:8890 -p 8991:8991 -8990:8990 -p 8891:8891 -p 8992:8992 keylime_cv:latest bash "run.sh" 
+sudo docker run -it --name keylime_cv_test -p 8881:8881 -p 8890:8890 -p 8891:8891 -8990:8990 -p 8991:8991 -p 8992:8992 keylime_cv:latest bash "run.sh" 
 ```
 Once the keylime verifier and registrar host is running, start and new keylime client node on VM with address ```10.0.0.13``` to connect to the keylime verifier and registrar host.
 ```
