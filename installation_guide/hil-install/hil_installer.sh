@@ -11,6 +11,7 @@ cd ~/hil
 cp examples/hil.cfg.dev-no-hardware hil.cfg
 export HIL_ENDPOINT=http://127.0.0.1:5000
 
+#no need to use another terminal
 virtualenv .venv
 source .venv/bin/activate
 easy_install -U setuptools
