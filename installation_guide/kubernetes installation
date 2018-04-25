@@ -1,0 +1,54 @@
+sudo passwd
+
+setenforce 0
+sed -i --follow-symlinks 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
+reboot
+
+su
+yum install firewalld -y
+systemctl start firewalld && systemctl enable firewalld
+firewall-cmd --permanent --add-port=6443/tcp
+firewall-cmd --permanent --add-port=2379-2380/tcp
+firewall-cmd --permanent --add-port=10250/tcp
+firewall-cmd --permanent --add-port=10251/tcp
+firewall-cmd --permanent --add-port=10252/tcp
+firewall-cmd --permanent --add-port=10255/tcp
+firewall-cmd --reload
+modprobe br_netfilter
+echo '1' > /proc/sys/net/bridge/bridge-nf-call-iptables
+
+cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg
+        https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+EOF
+yum install docker kubectl kubelet kubeadm -y
+
+systemctl restart docker && systemctl enable docker
+systemctl  restart kubelet && systemctl enable kubelet
+swapoff -a
+systemctl daemon-reload
+
+yum install dnsmasq -y
+cp /etc/resolv.conf ~/resolv.conf_bck
+rm -rf /etc/resolv.conf
+echo -e "nameserver 127.0.0.1\nnameserver $(hostname -i)" >> /etc/resolv.conf
+chmod 444 /etc/resolv.conf
+chattr +i /etc/resolv.conf
+echo -e "server=8.8.8.8\nserver=8.8.4.4" > /etc/dnsmasq.conf
+echo -e "$(hostname -i)\tlocalhost.$(hostname -d)" >> /etc/hosts
+service dnsmasq restart
+
+kubeadm init
+
+mkdir -p $HOME/.kube
+cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+chown $(id -u):$(id -g) $HOME/.kube/config
+
+export kubever=$(kubectl version | base64 | tr -d '\n')
+kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$kubever"
