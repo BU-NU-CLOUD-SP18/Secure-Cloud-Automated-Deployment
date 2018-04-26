@@ -88,6 +88,13 @@ $ yum install epel-release bridge-utils  gcc  httpd  ipmitool libvirt \
 libxml2-devel  libxslt-devel  mod_wsgi net-tools python-pip python-psycopg2 \
 python-virtinst python-virtualenv qemu-kvm telnet vconfig virt-install git -y
 ```
+Install pip and upgrade pip, use pip to install and upgrade setuptools
+```
+yum insatll python-pip -y
+pip install --upgrade pip
+pip install setuptools
+pip install --upgrade setuptools
+```
 Set Environment Variable, make a file call ```hil_env``` under ```/root``` directory has the following environment variables.
 ```
 export HIL_USER=hil
