@@ -103,11 +103,12 @@ Switch to root user to install hil at this moment
 ```
 $ sudo su -
 ```
-Following the following steps to install hil
+Following the following steps to install hil, since the current BMI supported hil verison is ```0.2```, therefore, install hil using the 0.2 version hil instead of the latest version of hil.
 ```
 $ cd /root
 $ git clone https://github.com/CCI-MOC/hil
 $ cd hil
+$ git checkout 12489961c975a7d0d0ec4328a59f5457d5b0103c
 $ python setup.py install
 ```
 under ```/root/hil``` directory, copy the ```hil.cfg``` file under ```/etc``` directory. Change the owner of the file to hil with group hil and change the file type to read only.
