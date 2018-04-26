@@ -94,7 +94,7 @@ python-virtinst python-virtualenv qemu-kvm telnet vconfig virt-install git -y
 ```
 Install pip and upgrade pip, use pip to install and upgrade setuptools
 ```
-yum insatll python-pip -y
+yum install python-pip -y
 pip install --upgrade pip
 pip install setuptools
 pip install --upgrade setuptools
