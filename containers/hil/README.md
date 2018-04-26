@@ -102,7 +102,7 @@ pip install --upgrade setuptools
 Set Environment Variable, make a file call ```hil_env``` under ```/root``` directory has the following environment variables.
 ```
 export HIL_USER=hil
-export HIL_ADMIN=hil
+export HIL_ADMIN_USER=hil
 export HIL_ADMIN_PASSWORD=secret
 export HIL_HOME_DIR=/var/lib/hil
 ```
