@@ -126,7 +126,7 @@ under ```/root/hil``` directory, copy the ```hil.cfg``` file under ```/etc``` di
 ```
 $ cd /root
 $ git clone https://github.com/BU-NU-CLOUD-SP18/Secure-Cloud-Automated-Deployment.git
-$ cp /root/Secure-Cloud-Automated-Deployment/container/hil/hil.cfg /etc/hil.cfg
+$ cp /root/Secure-Cloud-Automated-Deployment/containers/hil/hil.cfg /etc/hil.cfg
 $ chown ${HIL_USER}:${HIL_USER} /etc/hil.cfg
 $ chmod 400 /etc/hil.cfg
 ```
