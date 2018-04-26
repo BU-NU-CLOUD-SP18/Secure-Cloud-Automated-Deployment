@@ -8,7 +8,7 @@ def checkBoltedConfigurationFile(config):
 	   config['general']['bmi'] is "0.0.0.0" or \
 	   config['general']['keylime-cv'] is "0.0.0.0" or \
 	   config['genearl']['keylime-client'] is "0.0.0.0":
-	   print("Please change the configuration file to proceed")
+	   	print("Please change the configuration file to proceed")
 	else:
 		print("Now start installing bolted system.\n")
 def main():
