@@ -7,6 +7,7 @@ from subprocess import call
 def checkBoltedConfigurationFile(boltedConfig):
 #        print(boltedConfig['general']['hil'])
 
+	# use ping to check vm is reachable !!!!
         if str(boltedConfig['general']['hil']) == "0.0.0.0" or \
            str(boltedConfig['general']['bmi']) == "0.0.0.0" or \
            str(boltedConfig['general']['keylime-cv']) == "0.0.0.0" or \
