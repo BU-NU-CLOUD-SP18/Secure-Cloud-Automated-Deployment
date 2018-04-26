@@ -139,7 +139,12 @@ Switch to hil user and create a database, then create an admin user.
 ```
 $ sudo su - hil
 $ hil-admin db create
+
+# version 0.3
 $ hil-admin create-admin-user ${HIL_ADMIN_USER} ${HIL_ADMIN_PASSWORD}
+
+# version 0.2
+$ hil create-admin-user ${HIL_ADMIN_USER} ${HIL_ADMIN_PASSWORD}
 ```
 All HIL commands in these instructions should be run in this directory:
 ```
@@ -185,3 +190,23 @@ To make this happen on boot, add the following to /etc/rc.local:
 ```
 
 Once Everything is setup, restart the container.
+
+
+##### HIL Client:
+If your authentication backend is null, you only need to have the HIL_ENDPOINT defined in the client_env. In productions system where non-null backend is active, end users will have to include a username and password as additional parameters in client_env file to be able to communicate with the hil server. If you created a admin user for hil as a part of Setting Up HIL Database step, you will have to pass those credentials to HIL to be able to access, change state of HIL. Create a file client_env with following entries:
+```
+export HIL_ENDPOINT=http://127.0.0.1/
+export HIL_USERNAME=<hil_admin_username>
+export HIL_PASSWORD=<hil_admin_password>
+```
+To get started with HIL from your home dir do the following:
+```
+$ source client_env
+
+# version 0.3
+$ hil node list all
+
+# version 0.2
+$ hil list_nodes all
+```
+If you get an empty list [] as output then congratulations !! At this point, you should have a functional HIL service running!
