@@ -1,0 +1,34 @@
+- hosts: hil
+  tasks:
+    
+    - name: pull hil server image from docker hub
+      docker_image:
+        name: leonjia0112/hil_apache
+        tag: 2
+
+    - name: pull hil postgresql database image from docker hub
+      docker_image:
+        name: leonjia0112/hil_postgres
+        tag: latest
+
+    - name: create a subnet envrionment for hil
+      become: yes
+      become_user: yes
+      docker_network:
+        name: mynet
+        ipam_options:
+          subnet: '172.18.0.0/24'
+          gateway: 172.18.0.1
+          iprange: '172.18.0.0/24'
+
+    - name: run hil postgresql database container with ip address of 172.18.0.20
+      become: yes
+      become_user: root
+      command: sudo docker run -itd --net mynet --ip 172.18.0.20 --name hil_postgres postgres:latest
+
+    - name: run hil apache and network server with ip address of 172.18.0.21, publish port 80 to host port 8080
+      become: yes
+      become_user: root
+      command: sudo docker run -itd --net mynet --ip 172.18.0.21 -p 8080:80 --name hil_apache httpd:latest
+
+
