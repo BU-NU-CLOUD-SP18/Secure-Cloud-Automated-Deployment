@@ -35,7 +35,7 @@
       become: yes
       become_user: root
       git:
-	repo: https://github.com/leonjia0112/bolted.git
+        repo: https://github.com/leonjia0112/bolted.git
         dest: /home/bolted
         clone: yes
 
@@ -47,7 +47,7 @@
       become_user: root
       command: ./ip_setup.sh {{ inventory_hostname }}
       args:
-	chdir: /home/bolted/containers/keylime
+        chdir: /home/bolted/containers/keylime
 
     - name: run keylime client node
       command: docker run -it -p 9002:9002 keylime:latest bash '-c' "init_tpm_server; tpm_serverd; python ../keylime/cloud_node.py"
