@@ -9,6 +9,10 @@ Download the PostgreSQL image from docker hub
 ```
 $ docker pull postgres:latest
 ```
+Frist create a subnet in docker with name called mynet and ip address of 172.18.0.0/24 that is used for the communication between each container. (Use sudo for docker in Kaizen.)
+```
+sudo docker network create --subnet=172.18.0.0/24 mynet
+```
 Then run the PostgreSQL image, this container automated expose port ```5432``` for public access
 ```
 $ docker run -itd --net mynet --ip 172.18.0.20 --name hil_postgres postgres:latest
