@@ -1,57 +1,36 @@
-FROM centos:7
+FROM leonjia0112/centos_httpd:latest
 
-MAINTAINER Jalon Zou
+MAINTAINER Pei Jia(leojia@bu.edu)
 
-RUN adduser zjn && \
-    yum install -y sudo && \
-    echo "zjn ALL=(root) NOPASSWD:ALL" | tee -a /etc/sudoers.d/zjn && \
-    chmod 777 /
+RUN yum install epel-release bridge-utils  gcc  httpd  ipmitool libvirt \
+libxml2-devel  libxslt-devel  mod_wsgi net-tools python-pip python-psycopg2 \
+python-virtinst python-virtualenv qemu-kvm telnet vconfig virt-install git -y
 
-#USER zjn
+RUN yum install python-pip -y
+RUN pip install --upgrade pip
+# RUN pip install setuptools
+RUN pip install --upgrade setuptools
 
-WORKDIR /home/zjn
+RUN export HIL_USER=hil \
+    export HIL_ADMIN_USER=hil \
+    export HIL_ADMIN_PASSWORD=secret \
+    export HIL_HOME_DIR=/var/lib/hil
 
-ADD . /home/zjn
+RUN useradd --system ${HIL_USER} -d ${HIL_HOME_DIR} -m -r
 
-RUN yum groupinstall -y "development tools"
+WORKDIR	/root
 
-RUN cat pyreqs.txt | xargs yum -y install
+RUN git	clone https://github.com/CCI-MOC/hil
 
-RUN tar xf Python-2.7.14.tar.xz \
-&& cd Python-2.7.14 \
-&& ./configure --prefix=/usr/local --enable-unicode=ucs4 --enable-shared LDFLAGS="-Wl,-rpath /usr/local/lib" \
-&& make \
-&& make altinstall
+WORKDIR	/root/hil
 
-#RUN mv /usr/bin/python /usr/bin/python2
-#RUN ln -s /usr/local/bin/python2 /usr/bin/python
-#RUN sed -i 's@/usr/bin/python@/usr/bin/python2@g' /usr/bin/yum
+RUN python setup.py install
 
-RUN python2.7 --version
+WORKDIR	/root
 
-RUN cat depreqs.txt | xargs yum -y install
-#RUN yum -y install wget
+RUN git	clone https://github.com/BU-NU-CLOUD-SP18/Secure-Cloud-Automated-Deployment.git
+RUN cp /root/Secure-Cloud-Automated-Deployment/container/hil/hil.cfg /etc/hil.cfg   
+RUN chown ${HIL_USER}:${HIL_USER} /etc/hil.cfg
+RUN chmod 400 /etc/hil.cfg
 
-ENV HIL_ENDPOINT http://127.0.0.1:5000
 
-RUN curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py" \
-&& python2.7 get-pip.py \
-&& pip install setuptools --upgrade \
-&& easy_install -U  setuptools\
-&& yum install -y python34-setuptools \
-&& easy_install-3.4 pip \
-&& pip3 install --upgrade setuptools \
-&& export HIL_ENDPOINT=http://127.0.0.1:5000 \
-&& cd hil \
-&& pip install -e . \
-&& cp examples/hil.cfg.dev-no-hardware hil.cfg
-
-User zjn
-
-ENV HIL_ENDPOINT http://127.0.0.1:5000
-
-WORKDIR /home/zjn/hil
-
-EXPOSE 5000
-
-CMD ["hil-admin","db","create","&&","hil"," serve"," 5000"]
