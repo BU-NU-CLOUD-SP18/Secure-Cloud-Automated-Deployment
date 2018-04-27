@@ -119,7 +119,10 @@ Following the following steps to install hil, since the current BMI supported hi
 $ cd /root
 $ git clone https://github.com/CCI-MOC/hil
 $ cd hil
+
+# version 0.2 checkout this hash
 $ git checkout 12489961c975a7d0d0ec4328a59f5457d5b0103c
+
 $ python setup.py install
 ```
 under ```/root/hil``` directory, copy the ```hil.cfg``` file under ```/etc``` directory. Change the owner of the file to hil with group hil and change the file type to read only.
