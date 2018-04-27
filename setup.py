@@ -76,7 +76,7 @@ def main():
         print("Please input argument.\n")
 
     if not os.path.exists('bolted.cfg'):
-        print "File 'bolted.cfg' can not be found from containers/bmi/, please check before you proceed."
+        print "File 'bolted.cfg' can not be found from current directory, please check before you proceed."
         sys.exit()
 
     if not os.path.exists('containers/bmi/bmi_config.cfg'):
