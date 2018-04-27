@@ -1,4 +1,4 @@
-FROM leonjia0112/centos_httpd:latest
+FROM leonjia0112/httpd:latest
 
 MAINTAINER Pei Jia(leojia@bu.edu)
 
@@ -53,12 +53,17 @@ RUN echo "($ cd /var/lib/hil && su hil -c 'hil serve-networks') &" >> /etc/rc.lo
 USER hil
 WORKDIR /var/lib/hil
 RUN ln -s /etc/hil.cfg .
-RUN export HIL_ENDPOINT=http://127.0.0.1:80
-RUN hil-admin db create
-RUN hil create_admin_user hil 11111
+RUN export HIL_ENDPOINT=http://127.0.0.1:80 && \
+    hil-admin db create && \
+    hil create_admin_user hil 11111
 
 RUN echo "export HIL_ENDPOINT=http://127.0.0.1:80" >> env_hil
 RUN echo "export HIL_USERNAME=hil" >> env_hil
 RUN echo "export HIL_PASSWORD=11111" >> env_hil
+
+USER root
+WORKDIR /
+
+CMD ["/run-httpd.sh"]
 
 EXPOSE 80
