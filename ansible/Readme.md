@@ -71,3 +71,13 @@ Test Ping-Pong between all virtual machines.
 $ ansible all -m ping
 ```
 If it could connect successfully we could continue writing and running ansible playbooks.
+
+>Write Ansible playbook and run it on the hosts
+
+Playbooks are Ansible’s configuration, deployment, and orchestration language. They can describe a policy you want your remote systems to enforce, or a set of steps in a general IT process. Using ansible playbook to manage virtual machines and allocate resource will simplify the stpes in our project. Ansible playbook is written in YMAL file. There are three ansible playbooks in this folder which could achieve the goal of install docker, install HIL and install BMI in all the hosts which we added to the /ansible/hosts file.
+
+```sh
+$ run ansible-playbook file.yml
+```
+
+After checking the syntax error the user could run ansible playbook by using the command line above.
