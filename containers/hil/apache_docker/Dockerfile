@@ -23,20 +23,24 @@ RUN export HIL_USER=hil \
     export HIL_HOME_DIR=/var/lib/hil
 
 # create a hil system hil
-RUN useradd --system ${HIL_USER} -d ${HIL_HOME_DIR} -m -r
+RUN useradd --system hil -d /var/lib/hil -m -r
 
 # Install HIL from hil repo
-WORKDIR	/root
-RUN git	clone https://github.com/CCI-MOC/hil
-RUN git checkout 12489961c975a7d0d0ec4328a59f5457d5b0103c
-WORKDIR	/root/hil
+WORKDIR /root
+RUN git clone https://github.com/CCI-MOC/hil && \
+    cd /root/hil && \
+    git checkout 1248996
+
+WORKDIR /root/hil
 RUN python setup.py install
 
 # change hil configuration file from bolted repo
-WORKDIR	/root
-RUN git	clone https://github.com/BU-NU-CLOUD-SP18/Secure-Cloud-Automated-Deployment.git
-RUN cp /root/Secure-Cloud-Automated-Deployment/containers/hil/hil.cfg /etc/hil.cfg   
-RUN chown ${HIL_USER}:${HIL_USER} /etc/hil.cfg
+WORKDIR /root
+RUN ls
+RUN git clone https://github.com/BU-NU-CLOUD-SP18/Secure-Cloud-Automated-Deployment.git
+RUN cp /root/Secure-Cloud-Automated-Deployment/containers/hil/hil.cfg /etc/hil.cfg
+# RUN sed -i 's@uri = postgresql://hil:12345@172.18.0.20:5432/hil@uri = postgresql://hil:12345@172.17.0.2:5432/hil@' /etc/hil.cfg
+RUN chown hil:hil /etc/hil.cfg
 RUN chmod 400 /etc/hil.cfg
 
 # setup hil apache server and network server
@@ -47,6 +51,8 @@ RUN echo "($ cd /var/lib/hil && su hil -c 'hil serve-networks') &" >> /etc/rc.lo
 
 # create admin user of hil
 USER hil
+WORKDIR /var/lib/hil
+RUN ln -s /etc/hil.cfg .
 RUN export HIL_ENDPOINT=http://127.0.0.1:80
 RUN hil-admin db create
 RUN hil create_admin_user hil 11111
