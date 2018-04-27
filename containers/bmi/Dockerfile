@@ -87,7 +87,7 @@ RUN sqlite3 bmi.db && sqlite3 bmi.db "insert into project values(1,'bmi_infra','
 RUN pip install dumb-init
 
 # Switch user
-USER bmi
+# USER bmi
 
 
 WORKDIR /home/bmi
