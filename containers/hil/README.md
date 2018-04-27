@@ -119,7 +119,10 @@ Following the following steps to install hil, since the current BMI supported hi
 $ cd /root
 $ git clone https://github.com/CCI-MOC/hil
 $ cd hil
+
+# version 0.2 checkout this hash
 $ git checkout 12489961c975a7d0d0ec4328a59f5457d5b0103c
+
 $ python setup.py install
 ```
 under ```/root/hil``` directory, copy the ```hil.cfg``` file under ```/etc``` directory. Change the owner of the file to hil with group hil and change the file type to read only.
@@ -190,7 +193,11 @@ $ hil-admin serve-networks &
 ```
 To make this happen on boot, add the following to /etc/rc.local:
 ```
+# version 0.3 
 ($ cd /var/lib/hil && su hil -c 'hil-admin serve-networks') &
+
+# version 0.2
+($ cd /var/lib/hil && su hil -c 'hil serve-networks') &
 ```
 
 Once Everything is setup, restart the container.
