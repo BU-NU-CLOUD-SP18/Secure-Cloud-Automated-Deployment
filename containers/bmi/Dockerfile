@@ -1,55 +1,110 @@
-FROM centos:centos7
+FROM centos/systemd
 
-MAINTAINER Jalon Zou
+MAINTAINER Jiangnan_Zou
 
-ENV container docker
+# Create user and remove password for root
+RUN useradd -ms /bin/bash bmi
+RUN passwd -d bmi
+RUN passwd -d root
+RUN usermod -aG wheel bmi
 
-RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done); \
-rm -f /lib/systemd/system/multi-user.target.wants/*;\
-rm -f /etc/systemd/system/*.wants/*;\
-rm -f /lib/systemd/system/local-fs.target.wants/*; \
-rm -f /lib/systemd/system/sockets.target.wants/*udev*; \
-rm -f /lib/systemd/system/sockets.target.wants/*initctl*; \
-rm -f /lib/systemd/system/basic.target.wants/*;\
-rm -f /lib/systemd/system/anaconda.target.wants/*;
 
-WORKDIR /home/zjn
+WORKDIR /home/bmi
 
-ADD . /home/zjn
 
+# install pip
 RUN yum -y install python-setuptools python-setuptools-devel
-#RUN yum groupinstall -y "development tools"
-
 RUN curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py" \
 && python get-pip.py
 
+
+# install tgtd service and other dependencies
 RUN yum -y install ceph-common
-
 RUN yum -y install epel-release && \
-yum -y install scsi-target-utils
+yum -y install scsi-target-utils && \
+systemctl enable tgtd
 
-#RUN yum -y install firewalld && \
-#systemctl start firewalld && \
-#systemctl enable firewalld
 
-#RUN firewall-cmd --add-service=iscsi-target --permanent && \
-#firewall-cmd --reload && \
-#systemctl enable tgtd && \
-#systemctl restart tgtd
-
+# install DNS service
 RUN yum -y install dnsmasq
 
-RUN cd ims && \
-python setup.py install && \
+
+# install BMI
+RUN yum -y install git && \
+git clone https://github.com/CCI-MOC/ims
+
+
+WORKDIR /home/bmi/ims
+
+RUN python setup.py install && \
 pip install python-cephlibs && \
-mv bmi_config.cfg bmi_config.cfg.orig && \
-mv bmi_config.cfg.test bmi_config.cfg
+rm bmi_config.cfg
 
-RUN mkdir /etc/bmi && \
-cp /home/zjn/ims/bmi_config.cfg /etc/bmi/bmiconfig.cfg && \
-mkdir /home/bmi && \
-cp /home/zjn/ims/bmi_config.cfg /home/bmi
 
-CMD ["einstein_server","&&","picasso_server"]
+# Add bmi configuration file into container
+ADD bmi_ip_gen.sh bmi_ip_gen.sh
+RUN chmod +x bmi_ip_gen.sh
+ADD bmi_config.cfg bmi_config.cfg
+RUN ./bmi_ip_gen.sh
 
-EXPOSE 3260
+
+# Add the BMI execute script
+ADD runbmi.sh /home/bmi
+RUN chmod a+x /home/bmi/runbmi.sh
+
+
+# Set Environment variables
+ENV HIL_USERNAME admin
+ENV HIL_PASSWORD admin
+
+
+# Create required folders
+RUN mkdir /etc/bmi/
+RUN mkdir /var/log/bmi/
+RUN mkdir /var/lib/tftpboot/
+RUN mkdir /var/lib/tftpboot/pxelinux.cfg/
+RUN mkdir /var/lib/bmi/
+
+
+# Configure BMI
+RUN cp bmi_config.cfg /etc/bmi/bmiconfig.cfg && \
+cp bmi_config.cfg /home/bmi
+
+
+# Set Permissions
+RUN chown bmi:bmi /etc/tgt/conf.d/
+RUN chown bmi:bmi /var/log/bmi/
+RUN chown bmi:bmi /var/lib/tftpboot/
+RUN chown bmi:bmi /var/lib/tftpboot/pxelinux.cfg/
+RUN chown bmi:bmi /var/lib/bmi/
+
+
+# Create local database
+WORKDIR /etc/bmi
+RUN bmi project create project auto-net
+RUN sqlite3 bmi.db && sqlite3 bmi.db "insert into project values(1,'bmi_infra','provision');"
+
+RUN pip install dumb-init
+
+# Switch user
+USER bmi
+
+
+WORKDIR /home/bmi
+ENV BMI_CONFIG /etc/bmi/bmiconfig.cfg
+
+
+# Set Entrypoint in the container
+ENTRYPOINT ["/home/bmi/runbmi.sh"]
+
+
+# Start dependencies when container starts
+# CMD dumb-init /home/bmi/runbmi.sh
+
+
+# Expose ports to outside
+EXPOSE 3260 7000 9000 9893
+
+
+# Expose as volume to get keyring and ceph config
+VOLUME /etc/ceph
