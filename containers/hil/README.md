@@ -193,7 +193,11 @@ $ hil-admin serve-networks &
 ```
 To make this happen on boot, add the following to /etc/rc.local:
 ```
+# version 0.3 
 ($ cd /var/lib/hil && su hil -c 'hil-admin serve-networks') &
+
+# version 0.2
+($ cd /var/lib/hil && su hil -c 'hil serve-networks') &
 ```
 
 Once Everything is setup, restart the container.
