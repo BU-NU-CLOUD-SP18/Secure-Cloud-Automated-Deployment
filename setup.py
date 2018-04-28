@@ -11,7 +11,7 @@ def checkBoltedConfigurationFile(boltedConfig, bmiConfig):
     # use ping to check vm is reachable !!!!
     if str(boltedConfig['general']['hil']) == "0.0.0.0" or \
         str(boltedConfig['general']['bmi']) == "0.0.0.0" or \
-        str(boltedConfig['general']['keylime-cv']) == "0.0.0.0" or \
+        str(boltedConfig['general']['keylime-server']) == "0.0.0.0" or \
         str(boltedConfig['general']['keylime-client']) == "0.0.0.0" or \
         str(boltedConfig['bmi']['uid']).startswith('<') or \
         str(boltedConfig['bmi']['service']).startswith('<') or \
@@ -33,7 +33,7 @@ def checkBoltedConfigurationFile(boltedConfig, bmiConfig):
         f.write("\n\n[bmi]\n")
         f.write(str(boltedConfig['general']['bmi']))
         f.write("\n\n[keylime-cv]\n")
-        f.write(str(boltedConfig['general']['keylime-cv']))
+        f.write(str(boltedConfig['general']['keylime-server']))
         f.write("\n\n[keylime-client]\n")
         f.write(str(boltedConfig['general']['keylime-client']))
         f.write("\n")
@@ -54,19 +54,19 @@ def checkBoltedConfigurationFile(boltedConfig, bmiConfig):
     call(["sudo", "cp", "/etc/ansible/hosts", "tmp_hosts"])
     call(["sudo", "cp", "hosts", "/etc/ansible/hosts"])
 
-        # installing docker and dependencies on all VMs
-        # call(["ansible-playbook", "ansible/docker_deploy.yml"])
+    # installing docker and dependencies on all VMs
+    # call(["ansible-playbook", "ansible/docker_deploy.yml"])
 
-        # deploying keylime component
-        # call(["ansible-playbook", "ansible/keylime_deploy.yml"])
+    # deploying keylime component
+    # call(["ansible-playbook", "ansible/keylime_deploy.yml"])
 
-        # deploying hil component
-        # call(["ansible-playbook", "ansible/hil_deploy.yml"])
+    # deploying hil component
+    # call(["ansible-playbook", "ansible/hil_deploy.yml"])
 
-        # deploying bmi component
-        # call(["ansible-playbook", "ansible/bmi_deploy.yml"])
+    # deploying bmi component
+    # call(["ansible-playbook", "ansible/bmi_deploy.yml"])
 
-        # call(["sudo", "cp", "tmp_hosts", "/etc/ansible/hosts"])
+    # call(["sudo", "cp", "tmp_hosts", "/etc/ansible/hosts"])
 
 
 def main():

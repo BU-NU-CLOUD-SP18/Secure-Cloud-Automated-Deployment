@@ -1,10 +1,16 @@
 - hosts: hil
   tasks:
+
+    - name: pull bolted repo from github
+      become: yes
+      become_user: root
+      git:
+        repo: https://github.com/BU-NU-CLOUD-SP18/Secure-Cloud-Automated-Deployment.git
+        dest: /home/bolted
+        clone: yes
     
     - name: pull hil server image from docker hub
-      docker_image:
-        name: leonjia0112/hil_apache
-        tag: 2
+      command: docker build -it --rm hil_postgres:latest /home/bolted/containers/hil/postgres_docker   
 
     - name: pull hil postgresql database image from docker hub
       docker_image:
