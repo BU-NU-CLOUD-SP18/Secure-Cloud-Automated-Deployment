@@ -21,6 +21,11 @@ def checkBoltedConfigurationFile(boltedConfig, bmiConfig):
         str(boltedConfig['fs']['keyring']).startswith('<'):
         print "ERROR: Please change the configuration file to proceed"
         return
+    
+    if not (os.path.exists('../ceph_keyring/'+str(boltedConfig['fs']['keyring'])) && \
+        os.path.exists('../ceph_keyring/'+str(boltedConfig['fs']['conf_file']))):
+            print "ERROR: Please place your ceph key files into ceph_keyring folder."
+            return
 
     print("Now start installing bolted system.\n")
 
@@ -53,6 +58,9 @@ def checkBoltedConfigurationFile(boltedConfig, bmiConfig):
 
     call(["sudo", "cp", "/etc/ansible/hosts", "tmp_hosts"])
     call(["sudo", "cp", "hosts", "/etc/ansible/hosts"])
+    
+    # Execute ansible script to install BMI on BMI server
+    call(["ansible-playbook", "ansible/bmi_deploy.yml"])
 
     # installing docker and dependencies on all VMs
     # call(["ansible-playbook", "ansible/docker_deploy.yml"])
