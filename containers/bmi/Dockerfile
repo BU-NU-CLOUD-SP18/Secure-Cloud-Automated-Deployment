@@ -84,7 +84,7 @@ RUN pip install dumb-init
 # USER bmi
 
 
-WORKDIR /home/bmi
+WORKDIR /etc/ceph
 ENV BMI_CONFIG /etc/bmi/bmiconfig.cfg
 
 
