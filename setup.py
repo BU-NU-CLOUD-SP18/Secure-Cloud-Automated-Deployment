@@ -22,7 +22,7 @@ def checkBoltedConfigurationFile(boltedConfig, bmiConfig):
         print "ERROR: Please change the configuration file to proceed"
         return
     
-    if not (os.path.exists('../ceph_keyring/'+str(boltedConfig['fs']['keyring'])) && \
+    if not (os.path.exists('../ceph_keyring/'+str(boltedConfig['fs']['keyring'])) and \
         os.path.exists('../ceph_keyring/'+str(boltedConfig['fs']['conf_file']))):
             print "ERROR: Please place your ceph key files into ceph_keyring folder."
             return
