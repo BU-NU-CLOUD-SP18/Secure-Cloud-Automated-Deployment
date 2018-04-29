@@ -10,7 +10,16 @@
     - epel-release
     - docker-io
     - git
-
+    - python-pip
+    
+  - name: update pip
+    become: yes
+    become_user: root
+    command: pip install --upgrade pip
+    
+  - name: install docker module
+    command: pip install docker-py
+    
   - name: remove /var/lib/docker
     file:
       path: /var/lib/docker
