@@ -18,6 +18,8 @@
     command: pip install --upgrade pip
     
   - name: install docker module
+    become: yes
+    become_user: root
     command: pip install docker-py
     
   - name: remove /var/lib/docker
