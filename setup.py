@@ -63,7 +63,7 @@ def checkBoltedConfigurationFile(boltedConfig, bmiConfig):
     call(["sudo", "cp", "hosts", "/etc/ansible/hosts"])
     
     # installing docker and dependencies on all VMs
-    call(["ansible-playbook", "ansible/docker_deploy.yml"])
+    call(["ansible-playbook", "ansible/docker_install.yml"])
     
     # Execute ansible script to install BMI on BMI server
     call(["ansible-playbook", "ansible/bmi_deploy.yml"])
@@ -86,6 +86,12 @@ def checkBoltedConfigurationFile(boltedConfig, bmiConfig):
     call(["ansible-playbook", "ansible/bmi_deploy.yml"])
 
     call(["sudo", "cp", "tmp_hosts", "/etc/ansible/hosts"])
+    
+    if os.path.exists('hosts'):
+        os.remove('hosts')
+    
+    if os.path.exists('tmp_hosts'):
+        os.remove('tmp_hosts')
     
 
 def main():
