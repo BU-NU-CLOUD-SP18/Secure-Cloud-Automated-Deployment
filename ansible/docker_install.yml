@@ -20,7 +20,7 @@
   - name: install docker module
     become: yes
     become_user: root
-    command: pip install docker-py
+    command: pip install argparse oauth pyserial docker-py
     
   - name: remove /var/lib/docker
     file:
