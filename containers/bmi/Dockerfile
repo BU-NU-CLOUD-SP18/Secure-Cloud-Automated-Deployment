@@ -45,7 +45,6 @@ rm bmi_config.cfg
 ADD bmi_ip_gen.sh bmi_ip_gen.sh
 RUN chmod +x bmi_ip_gen.sh
 ADD bmi_config.cfg bmi_config.cfg
-RUN ./bmi_ip_gen.sh
 
 
 # Add the BMI execute script
@@ -53,7 +52,7 @@ ADD runbmi.sh /home/bmi
 RUN chmod a+x /home/bmi/runbmi.sh
 
 
-# Set Environment variables
+# Set Environment variables for hil
 ENV HIL_USERNAME admin
 ENV HIL_PASSWORD admin
 
@@ -66,9 +65,9 @@ RUN mkdir /var/lib/tftpboot/pxelinux.cfg/
 RUN mkdir /var/lib/bmi/
 
 
-# Configure BMI
-RUN cp bmi_config.cfg /etc/bmi/bmiconfig.cfg && \
-cp bmi_config.cfg /home/bmi
+# Set up configuration files for BMI
+COPY bmi_config.cfg /etc/bmi/bmiconfig.cfg
+COPY bmi_config.cfg /home/bmi/bmi_config.cfg
 
 
 # Set Permissions
@@ -78,11 +77,6 @@ RUN chown bmi:bmi /var/lib/tftpboot/
 RUN chown bmi:bmi /var/lib/tftpboot/pxelinux.cfg/
 RUN chown bmi:bmi /var/lib/bmi/
 
-
-# Create local database
-WORKDIR /etc/bmi
-RUN bmi project create project auto-net
-RUN sqlite3 bmi.db && sqlite3 bmi.db "insert into project values(1,'bmi_infra','provision');"
 
 RUN pip install dumb-init
 
