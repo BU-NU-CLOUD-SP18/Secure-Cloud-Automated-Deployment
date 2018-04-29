@@ -6,13 +6,13 @@ from subprocess import call
 
 
 def checkBoltedConfigurationFile(boltedConfig, bmiConfig):
-    #        print(boltedConfig['general']['hil'])
+    #        print(boltedConfig['severip']['hil'])
 
     # use ping to check vm is reachable !!!!
-    if str(boltedConfig['general']['hil']) == "0.0.0.0" or \
-        str(boltedConfig['general']['bmi']) == "0.0.0.0" or \
-        str(boltedConfig['general']['keylime-server']) == "0.0.0.0" or \
-        str(boltedConfig['general']['keylime-client']) == "0.0.0.0" or \
+    if str(boltedConfig['severip']['hil']) == "0.0.0.0" or \
+        str(boltedConfig['severip']['bmi']) == "0.0.0.0" or \
+        str(boltedConfig['severip']['keylime-server']) == "0.0.0.0" or \
+        str(boltedConfig['severip']['keylime-client']) == "0.0.0.0" or \
         str(boltedConfig['bmi']['uid']).startswith('<') or \
         str(boltedConfig['bmi']['service']).startswith('<') or \
         str(boltedConfig['fs']['id']).startswith('<') or \
@@ -34,13 +34,13 @@ def checkBoltedConfigurationFile(boltedConfig, bmiConfig):
 
     with open("hosts", "w+") as f:
         f.write("[hil]\n")
-        f.write(str(boltedConfig['general']['hil']))
+        f.write(str(boltedConfig['severip']['hil']))
         f.write("\n\n[bmi]\n")
-        f.write(str(boltedConfig['general']['bmi']))
+        f.write(str(boltedConfig['severip']['bmi']))
         f.write("\n\n[keylime-cv]\n")
-        f.write(str(boltedConfig['general']['keylime-server']))
+        f.write(str(boltedConfig['severip']['keylime-server']))
         f.write("\n\n[keylime-client]\n")
-        f.write(str(boltedConfig['general']['keylime-client']))
+        f.write(str(boltedConfig['severip']['keylime-client']))
         f.write("\n")
 
     # Reconfigure BMI config file
@@ -50,7 +50,7 @@ def checkBoltedConfigurationFile(boltedConfig, bmiConfig):
     bmiConfig['fs']['pool'] = boltedConfig['fs']['pool']
     bmiConfig['fs']['conf_file'] = boltedConfig['fs']['conf_file']
     bmiConfig['fs']['keyring'] = boltedConfig['fs']['keyring']
-    bmiConfig['net_isolator']['url'] = boltedConfig['general']['hil']+':80'
+    bmiConfig['net_isolator']['url'] = boltedConfig['severip']['hil']+':80'
 
     # Overwrite the original BMI conf file 
     with open("containers/bmi/bmi_config.cfg", 'w') as f:
