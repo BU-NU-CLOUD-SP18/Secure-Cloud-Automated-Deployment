@@ -6,13 +6,13 @@ from subprocess import call
 
 
 def checkBoltedConfigurationFile(boltedConfig, bmiConfig):
-    #        print(boltedConfig['severip']['hil'])
+    #        print(boltedConfig['general']['hil'])
 
     # use ping to check vm is reachable !!!!
-    if str(boltedConfig['severip']['hil']) == "0.0.0.0" or \
-        str(boltedConfig['severip']['bmi']) == "0.0.0.0" or \
-        str(boltedConfig['severip']['keylime-server']) == "0.0.0.0" or \
-        str(boltedConfig['severip']['keylime-client']) == "0.0.0.0" or \
+    if str(boltedConfig['serverip']['hil']) == "0.0.0.0" or \
+        str(boltedConfig['serverip']['bmi']) == "0.0.0.0" or \
+        str(boltedConfig['serverip']['keylime-server']) == "0.0.0.0" or \
+        str(boltedConfig['serverip']['keylime-client']) == "0.0.0.0" or \
         str(boltedConfig['bmi']['uid']).startswith('<') or \
         str(boltedConfig['bmi']['service']).startswith('<') or \
         str(boltedConfig['fs']['id']).startswith('<') or \
@@ -34,13 +34,13 @@ def checkBoltedConfigurationFile(boltedConfig, bmiConfig):
 
     with open("hosts", "w+") as f:
         f.write("[hil]\n")
-        f.write(str(boltedConfig['severip']['hil']))
+        f.write(str(boltedConfig['serverip']['hil']))
         f.write("\n\n[bmi]\n")
-        f.write(str(boltedConfig['severip']['bmi']))
+        f.write(str(boltedConfig['serverip']['bmi']))
         f.write("\n\n[keylime-cv]\n")
-        f.write(str(boltedConfig['severip']['keylime-server']))
+        f.write(str(boltedConfig['serverip']['keylime-server']))
         f.write("\n\n[keylime-client]\n")
-        f.write(str(boltedConfig['severip']['keylime-client']))
+        f.write(str(boltedConfig['serverip']['keylime-client']))
         f.write("\n")
 
     # Reconfigure BMI config file
@@ -50,7 +50,7 @@ def checkBoltedConfigurationFile(boltedConfig, bmiConfig):
     bmiConfig['fs']['pool'] = boltedConfig['fs']['pool']
     bmiConfig['fs']['conf_file'] = boltedConfig['fs']['conf_file']
     bmiConfig['fs']['keyring'] = boltedConfig['fs']['keyring']
-    bmiConfig['net_isolator']['url'] = boltedConfig['severip']['hil']+':80'
+    bmiConfig['net_isolator']['url'] = boltedConfig['serverip']['hil']+':80'
 
     # Overwrite the original BMI conf file 
     with open("containers/bmi/bmi_config.cfg", 'w') as f:
@@ -59,22 +59,30 @@ def checkBoltedConfigurationFile(boltedConfig, bmiConfig):
     call(["sudo", "cp", "/etc/ansible/hosts", "tmp_hosts"])
     call(["sudo", "cp", "hosts", "/etc/ansible/hosts"])
     
+    # installing docker and dependencies on all VMs
+    call(["ansible-playbook", "ansible/docker_deploy.yml"])
+    
     # Execute ansible script to install BMI on BMI server
     call(["ansible-playbook", "ansible/bmi_deploy.yml"])
 
-    # installing docker and dependencies on all VMs
-    # call(["ansible-playbook", "ansible/docker_deploy.yml"])
-
-    # deploying keylime component
-    # call(["ansible-playbook", "ansible/keylime_deploy.yml"])
+    # deploying keylime server component
+    call(["ansible-playbook", "ansible/keylime_server_deploy.yml"])
+    
+    # deploying keylime client node component
+    keylimeclientargs = ['ansible-playbook', 'ansible/keylime_client_deploy.yml', '-e']
+    keylimeserverip = 'myip=' + str(boltedConfig['serverip']['keylime-server'])
+    print(keylimeserverip)
+    keylimeclientargs.append(keylimeserverip)
+    print(keylimeclientargs)
+    call(keylimeclientargs)
 
     # deploying hil component
-    # call(["ansible-playbook", "ansible/hil_deploy.yml"])
+    call(["ansible-playbook", "ansible/hil_deploy.yml"])
 
     # deploying bmi component
-    # call(["ansible-playbook", "ansible/bmi_deploy.yml"])
+    call(["ansible-playbook", "ansible/bmi_deploy.yml"])
 
-    # call(["sudo", "cp", "tmp_hosts", "/etc/ansible/hosts"])
+    call(["sudo", "cp", "tmp_hosts", "/etc/ansible/hosts"])
 
 
 def main():
