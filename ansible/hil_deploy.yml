@@ -10,31 +10,42 @@
         clone: yes
     
     - name: pull hil server image from docker hub
-      command: docker build -it --rm hil_postgres:latest /home/bolted/containers/hil/postgres_docker   
-
-    - name: pull hil postgresql database image from docker hub
-      docker_image:
-        name: leonjia0112/hil_postgres
-        tag: latest
-
-    - name: create a subnet envrionment for hil
-      become: yes
-      become_user: yes
-      docker_network:
-        name: mynet
-        ipam_options:
-          subnet: '172.18.0.0/24'
-          gateway: 172.18.0.1
-          iprange: '172.18.0.0/24'
-
-    - name: run hil postgresql database container with ip address of 172.18.0.20
       become: yes
       become_user: root
-      command: sudo docker run -itd --net mynet --ip 172.18.0.20 --name hil_postgres postgres:latest
+      command: docker build -it --rm hil_postgres:latest .   
+      args:
+        chdir: /home/bolted/containers/hil/postgres_docker
 
-    - name: run hil apache and network server with ip address of 172.18.0.21, publish port 80 to host port 8080
+    - name: run postgres image 
       become: yes
       become_user: root
-      command: sudo docker run -itd --net mynet --ip 172.18.0.21 -p 8080:80 --name hil_apache httpd:latest
+      command: docker run -itd --name hil_database hil_postgres:latest
+      args:
+        chdir: /home/bolted/containers/hil/postgres_docker
 
+    - name: store the postgresql database ip to variable
+      become: yes
+      become_user: root
+      shell: docker inspect --format '{{ .NetworkSettings.IPAddress }}' hil_database
+      register: output
+
+    - name: display postgresql database ip address
+      debug: msg = {{ output.stdout }}
+
+    - name: modify the hil.cfg file with updated 
+      command: /bin/bash database_ip.sh {{ output.stdout }}
+      args:
+        chdir: /home/bolted/contianers/hil/apache_docker
+
+    - name: build hil apache docker file
+      become: yes
+      become_user: root
+      command: docker build -it --rm hil_apache:latest .
+      args:
+        chdir: /home/bolted/containers/apache_docker
+
+    - name: run hil apache docker file
+      become: yes
+      beomce_root: root
+      command: docker run -itd --name hil_server hil_apache:latest  
 
