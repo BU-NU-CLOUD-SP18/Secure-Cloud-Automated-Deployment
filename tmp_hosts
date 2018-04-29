@@ -1,21 +1,11 @@
-[localhost]
-127.0.0.1
-
-[ansible1]
-10.0.0.13
-
-[ansible2]
-10.0.0.9
-
-[keylime-server]
-10.0.0.9
-
-[keylime-client]
-10.0.0.13
-
 [hil]
 10.0.0.10
 
 [bmi]
 10.0.0.14
 
+[keylime-cv]
+10.0.0.9
+
+[keylime-client]
+10.0.0.13

@@ -37,7 +37,7 @@ def checkBoltedConfigurationFile(boltedConfig, bmiConfig):
         f.write(str(boltedConfig['serverip']['hil']))
         f.write("\n\n[bmi]\n")
         f.write(str(boltedConfig['serverip']['bmi']))
-        f.write("\n\n[keylime-cv]\n")
+        f.write("\n\n[keylime-server]\n")
         f.write(str(boltedConfig['serverip']['keylime-server']))
         f.write("\n\n[keylime-client]\n")
         f.write(str(boltedConfig['serverip']['keylime-client']))
@@ -63,7 +63,7 @@ def checkBoltedConfigurationFile(boltedConfig, bmiConfig):
     call(["sudo", "cp", "hosts", "/etc/ansible/hosts"])
     
     # installing docker and dependencies on all VMs
-    call(["ansible-playbook", "ansible/docker_install.yml"])
+    # call(["ansible-playbook", "ansible/docker_install.yml"])
 
     # deploying keylime server component
     call(["ansible-playbook", "ansible/keylime_server_deploy.yml"])
