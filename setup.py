@@ -64,9 +64,6 @@ def checkBoltedConfigurationFile(boltedConfig, bmiConfig):
     
     # installing docker and dependencies on all VMs
     call(["ansible-playbook", "ansible/docker_install.yml"])
-    
-    # Execute ansible script to install BMI on BMI server
-    call(["ansible-playbook", "ansible/bmi_deploy.yml"])
 
     # deploying keylime server component
     call(["ansible-playbook", "ansible/keylime_server_deploy.yml"])
