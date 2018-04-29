@@ -19,22 +19,17 @@
       tag: latest
       push: no
 
-  - name: Create directory for ceph volume
+  - name: Create directory for ceph volume and copy ceph keyring there
     become_user: root
     become: yes
-    file: path=/etc/ceph state=directory
-
-  - name: Copy ceph keyring to BMI server
-    become_user: root
-    become: yes
-    copy:
-      src: ../ceph_keyring/ceph.client.admin.keyring
-      dest: /etc/ceph/ceph.client.admin.keyring
-    copy:
-      src: ../ceph_keyring/ceph.conf
-      dest: /etc/ceph/ceph.conf
+    copy: 
+      src: "{{ item }}"
+      dest: /etc/ceph/
+    with_fileglob:
+      - ../ceph_keyring/*
   
   - name: Run BMI container
+    become: yes
     docker_container:
       name: bmi_image
       image: bmi
