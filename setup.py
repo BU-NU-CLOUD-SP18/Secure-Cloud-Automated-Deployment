@@ -56,6 +56,9 @@ def checkBoltedConfigurationFile(boltedConfig, bmiConfig):
     with open("containers/bmi/bmi_config.cfg", 'w') as f:
         bmiConfig.write(f)
 
+    print('Now running all the ansible scripts')
+    
+    
     call(["sudo", "cp", "/etc/ansible/hosts", "tmp_hosts"])
     call(["sudo", "cp", "hosts", "/etc/ansible/hosts"])
     
@@ -83,7 +86,7 @@ def checkBoltedConfigurationFile(boltedConfig, bmiConfig):
     call(["ansible-playbook", "ansible/bmi_deploy.yml"])
 
     call(["sudo", "cp", "tmp_hosts", "/etc/ansible/hosts"])
-
+    
 
 def main():
     #   print(sys.argv[1] == 'install')
