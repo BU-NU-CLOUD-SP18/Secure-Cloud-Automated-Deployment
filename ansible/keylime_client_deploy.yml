@@ -1,0 +1,61 @@
+---
+- hosts: keylime-client
+  tasks:
+
+    - name: clone repo to directory
+      become: yes
+      become_user: root
+      git:
+        repo: https://github.com/BU-NU-CLOUD-SP18/Secure-Cloud-Automated-Deployment.git
+        dest: /home/centos/bolted
+        clone: yes
+
+    - name: update host ip address in keylime configuration file
+      become: yes
+      become_user: root
+      command: ./ip_setup.sh {{ keylimeserverip }}
+      args:
+        chdir: /home/centos/bolted/containers/keylime
+
+
+    - name: build keylime client docker image
+      become: yes
+      become_user: root
+      command:  docker build -t keylime:latest .
+      args:
+        chdir: /home/centos/bolted/containers/keylime
+
+#    - name: build keylime client docker image
+#      docker_image:
+#        path: /home/centos/bolted/containers/keylime
+#        name: keylime
+#        tag: latest
+
+#    - name: run keylime client node
+#      become: yes
+#      become_user: root
+#      command: docker run -it -p 9002:9002 --name keylime-client keylime:latest bash '-c' "init_tpm_server; tpm_serverd; python ../keylime/cloud_node.py"
+#      args:
+#        chdir: /home/centos/bolted/containers/keylime
+
+# ansible module version of create container
+    - name: run keylime client node
+      become: yes
+      become_user: root
+      docker_container:
+        name: keylime-client
+        image: keylime
+        state: started
+        pull: no
+        interactive: yes
+        tty: yes
+        detach: yes
+        ports:
+         - "9002:9002"
+        command: ["bash", "-c", "'init_tpm_server; tpm_serverd; python ../keylime/cloud_node.py'"]
+
+    - name: print message
+      debug:
+        msg:  "finished keylime client at {{ inventory_hostname }}"
+
+...
