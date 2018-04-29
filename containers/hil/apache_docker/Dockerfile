@@ -1,4 +1,4 @@
-FROM leonjia0112/httpd:latest
+FROM httpd:latest
 
 MAINTAINER Pei Jia(leojia@bu.edu)
 
