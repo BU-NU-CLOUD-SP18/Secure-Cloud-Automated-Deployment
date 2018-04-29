@@ -1,50 +1,62 @@
 - hosts: hil
   tasks:
 
+    - name: create directory 
+      file:
+        path: /home/centos/bolted
+        state: directory
+   
     - name: pull bolted repo from github
       become: yes
       become_user: root
       git:
         repo: https://github.com/BU-NU-CLOUD-SP18/Secure-Cloud-Automated-Deployment.git
-        dest: /home/bolted
+        dest: /home/centos/bolted
         clone: yes
     
-    - name: pull hil server image from docker hub
+    - name: build hil database image from docker hub
       become: yes
       become_user: root
-      command: docker build -it --rm hil_postgres:latest .   
+      command: docker build --rm -t hil_postgres:latest .   
       args:
-        chdir: /home/bolted/containers/hil/postgres_docker
+        chdir: /home/centos/bolted/containers/hil/postgres_docker
 
-    - name: run postgres image 
+    - name: run postgres hil database image 
       become: yes
       become_user: root
       command: docker run -itd --name hil_database hil_postgres:latest
       args:
-        chdir: /home/bolted/containers/hil/postgres_docker
+        chdir: /home/centos/bolted/containers/hil/postgres_docker
 
     - name: store the postgresql database ip to variable
       become: yes
       become_user: root
-      shell: docker inspect --format '{{ .NetworkSettings.IPAddress }}' hil_database
+      command: docker inspect --format \{\{.NetworkSettings.IPAddress\}\} hil_database
       register: output
 
     - name: display postgresql database ip address
-      debug: msg = {{ output.stdout }}
+      debug: msg ="{{ output.stdout }}"
 
-    - name: modify the hil.cfg file with updated 
-      command: /bin/bash database_ip.sh {{ output.stdout }}
-      args:
-        chdir: /home/bolted/contianers/hil/apache_docker
-
-    - name: build hil apache docker file
+    - name: create centos apache httpd image
       become: yes
       become_user: root
-      command: docker build -it --rm hil_apache:latest .
+      command: docker build --rm -t httpd:latest .
       args:
-        chdir: /home/bolted/containers/apache_docker
+        chdir: /home/centos/bolted/containers/httpd_centos/
 
-    - name: run hil apache docker file
+#    - name: modify the hil.cfg file with updated 
+#      command: /bin/bash database_ip.sh {{ output.stdout }}
+#      args:
+#        chdir: /home/centos/bolted/containers/hil/
+
+    - name: build hil apache server docker file
+      become: yes
+      become_user: root
+      command: docker build --rm -t  hil_apache:latest .
+      args:
+        chdir: /home/centos/bolted/containers/hil/apache_docker
+
+    - name: run hil apache server docker file
       become: yes
       beomce_root: root
       command: docker run -itd --name hil_server hil_apache:latest  
