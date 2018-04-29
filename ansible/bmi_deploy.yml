@@ -1,0 +1,52 @@
+---
+- name: Install BMI
+  hosts: bmi
+
+  tasks:
+  - name: Copy BMI installation file to BMI server
+    become_user: root
+    become: yes
+    copy:
+      src: ../containers/bmi
+      dest: /home
+
+  - name: Build the BMI image
+    become_user: root
+    become: yes
+    docker_image:
+      path: /home/bmi/
+      name: bmi
+      tag: latest
+      push: no
+
+  - name: Create directory for ceph volume
+    become_user: root
+    become: yes
+    file: path=/etc/ceph state=directory
+
+  - name: Copy ceph keyring to BMI server
+    become_user: root
+    become: yes
+    copy:
+      src: ../ceph_keyring/ceph.client.admin.keyring
+      dest: /etc/ceph/ceph.client.admin.keyring
+    copy:
+      src: ../ceph_keyring/ceph.conf
+      dest: /etc/ceph/ceph.conf
+  
+  - name: Run BMI container
+    docker_container:
+      name: bmi_image
+      image: bmi
+      state: started
+      pull: no
+      interactive: yes
+      tty: yes
+      ports:
+      - "3260:3260"
+      - "7000:7000"
+      - "9000:9000"
+      - "9893:9893"
+      volumes: "/etc/ceph:/etc/ceph"
+...
+
