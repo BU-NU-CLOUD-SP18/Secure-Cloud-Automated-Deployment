@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Set up IP address for all services
-ims/bmi_ip_gen.sh /home/bmi/ims/bmi_config.cfg
-ims/bmi_ip_gen.sh /etc/bmi/bmiconfig.cfg
-ims/bmi_ip_gen.sh /home/bmi/bmi_config.cfg
+/home/bmi/ims/bmi_ip_gen.sh /home/bmi/ims/bmi_config.cfg
+/home/bmi/ims/bmi_ip_gen.sh /etc/bmi/bmiconfig.cfg
+/home/bmi/ims/bmi_ip_gen.sh /home/bmi/bmi_config.cfg
 
 # Create local sqlite3 database
 bmi project create project auto-net
