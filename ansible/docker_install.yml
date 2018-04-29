@@ -1,5 +1,5 @@
 ---
-- hosts: ansible2
+- hosts: all
   sudo: yes
   tasks:
  
