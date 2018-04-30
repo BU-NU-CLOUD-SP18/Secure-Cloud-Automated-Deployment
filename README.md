@@ -31,13 +31,13 @@ The current release require the system meet those requirements:
 #### Configuration File
 Here is a sample of configuration file `bolted.cfg`, user should change the item insider the configuration file to install the component based on the item detail.
 ```
-# ip address of where the server locate
+# ip address of where the server is located
 [serverip]
 hil=10.0.0.10
 bmi=10.0.0.14
 keylime-server=10.0.0.9
 
-# for teasting purpose, keylime client is integrated with all other server to deploy together
+# for testing purpose, keylime client is integrated with all other servers to be deployed together
 keylime-client=10.0.0.13
 
 # bmi configuration parameter
@@ -58,7 +58,7 @@ Once the configuration file has been setup based on user's environment, user is 
 $ ssh-agent bash
 $ ssh-add ~/.ssh/id_rsa
 ```
-Once user have input the public key password, user is not able to run the installation program to install the system.
+Once the user has the input, the public key password, user is not able to run the installation program to install the system.
 ```
 $ python setup.py install
 ```
@@ -66,13 +66,13 @@ $ python setup.py install
 ## Release
 #### release v0.1 (4/30/2018 current release)
 This release contains the following feature items:
-* Containerize all the system componont using docker
+* Containerize all the system components using docker
 * Deploy all the services inside containers on seperate machines
 * Auto deploy all the components on virtual machine platform for user
 * Customizable configuration setup file for easy install
 * Ansible playbook script for reliable component deployment manegement
 * Automated install program
-* Auto configure user virtual machine envrionment to meet system dependencies
+* Auto configure the user virtual machine envrionment to meet system dependencies
 
 ## Mass Open Cloud
 This project is part of the larger [Mass Open Cloud](https://massopen.cloud/).
