@@ -2,28 +2,50 @@
 - hosts: keylime-client
   tasks:
 
-    - name: clone repo to directory
+#    - name: clone repo to directory
+#      become: yes
+#      become_user: root
+#      git:
+#        repo: https://github.com/BU-NU-CLOUD-SP18/Secure-Cloud-Automated-Deployment.git
+#        dest: /home/centos/bolted
+#        clone: yes
+
+    - name: copy keylime file to remote location
       become: yes
       become_user: root
-      git:
-        repo: https://github.com/BU-NU-CLOUD-SP18/Secure-Cloud-Automated-Deployment.git
-        dest: /home/centos/bolted
-        clone: yes
+      copy:
+        src: ../containers/keylime
+        dest: /home/
+
+    - name: change file to executable
+      become: yes
+      become_user: root
+      command: chmod +x ip_setup.sh
+      args:
+        chdir: /home/keylime
 
     - name: update host ip address in keylime configuration file
       become: yes
       become_user: root
       command: ./ip_setup.sh {{ myip }}
       args:
-        chdir: /home/centos/bolted/containers/keylime
+        chdir: /home/keylime
 
-
-    - name: build keylime client docker image
+    - name: build keylime client node docker image
       become: yes
       become_user: root
-      command:  docker build -t keylime:latest .
-      args:
-        chdir: /home/centos/bolted/containers/keylime
+      docker_image:
+        path: /home/keylime
+        name: keylime
+        tag: latest
+        push: no
+
+#    - name: build keylime client docker image
+#      become: yes
+#      become_user: root
+#      command:  docker build -t keylime:latest .
+#      args:
+#        chdir: /home/centos/bolted/containers/keylime
 
 #    - name: build keylime client docker image
 #      docker_image:
@@ -39,6 +61,7 @@
 #        chdir: /home/centos/bolted/containers/keylime
 
 # ansible module version of create container
+    
     - name: run keylime client node
       become: yes
       become_user: root
