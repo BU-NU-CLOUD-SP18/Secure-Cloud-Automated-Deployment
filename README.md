@@ -6,10 +6,9 @@ Yuxi Jiang<br/>
 Jiangnan Zou<br/>
 
 ## Project Description and Goal
-
 Bolted system is designed to carve an enclave cloud network through public cloud. By integrating this system, Bolted system is able to provide customers with a secure, elastic, scalable, flexible and user-friendly enclave cloud network. Security assurance is applied not just to the firmware of the physical machine, but also to the operating system, application and generally any software that runs on the machine. 
 
-For this project, we deliver an automated installation and configuration of the Bolted System for any provider, so that the provider would not need to install and configure the system component by component before delivering it to the tenant. This project is associated with the Mass OpenCloud (MOC) components and MIT Lincoln Lab component to provide this IaaS Service for tenant.
+For this project, we deliver an automated installation and configuration of the Bolted System for cloud provider, so that the provider would not need to install and configure the system component by component before using system. This project associates with the Mass OpenCloud (MOC) components and MIT Lincoln Lab component to provide this IaaS Service for tenant.
 
 ## Project Goal Includes:
 
@@ -20,6 +19,7 @@ Configured each components’ connection based on the Bolted system schematics t
 ## Background
 
 The prevalence of public cloud offerings at various level including infrastructure, platform and software as a service have drawn much of the public’s attention to their security issues. Whereas most IaaS providers may have realized the imperative nature of this public concern, they are relatively indifferent to this aspect since the access to sensitive data is only limited to their own employees. This notion, however, can not be applied to a generally-defined public cloud where customers seek the privilege to secure their own data. On the premise of this demand, bolted system is proposed to serve those customers with higher security concerns.
+![alt text](https://github.com/BU-NU-CLOUD-SP18/Secure-Cloud-Automated-Deployment.git/docs/bolted_architecture.png "Bolted System Architecture")
 
 
 ## Bolted System Skeleton
