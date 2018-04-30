@@ -1,10 +1,10 @@
 # BMI Image
-The Bare Metal Imaging (BMI) is a core component of the Massachusetts Open Cloud and an Image Management System(IMS). The files under this Directory is a part of Bolted System deploying process which works with BMI Ansible script to help you build, configure and run a BMI container automatically. Note that you are **NOT** supposed to build a runnable BMI container by manually running "docker build" command from this derectory.
+The Bare Metal Imaging (BMI) is a core component of the Massachusetts Open Cloud and an Image Management System(IMS). The files under this Directory is a part of Bolted System deploying process which works with BMI Ansible script to help you build, configure and run a BMI container automatically. Note that you are **NOT** supposed to build a runnable BMI container by manually running "docker build" command from this directory.
 
 ## How to play with BMI container
 After BMI is successfully built and run, you are able execute the following commands to manage your image.
 You should check on your designated BMI node the BMI container is running:
-`sudo docker ps`
+```sudo docker ps```
 
 ### Several ways to interact with container
 Before you start to type your own commands. You can optionally pick one of the following ways to interact with BMI containers.
