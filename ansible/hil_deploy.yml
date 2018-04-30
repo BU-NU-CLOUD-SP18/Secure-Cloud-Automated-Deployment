@@ -1,32 +1,75 @@
 - hosts: hil
   tasks:
 
-    - name: create directory 
-      file:
-        path: /home/centos/bolted
-        state: directory
+#    - name: create directory 
+#      file:
+#        path: /home/centos/bolted
+#        state: directory
    
-    - name: pull bolted repo from github
-      become: yes
-      become_user: root
-      git:
-        repo: https://github.com/BU-NU-CLOUD-SP18/Secure-Cloud-Automated-Deployment.git
-        dest: /home/centos/bolted
-        clone: yes
-    
-    - name: build hil database image from docker hub
-      become: yes
-      become_user: root
-      command: docker build --rm -t hil_postgres:latest .   
-      args:
-        chdir: /home/centos/bolted/containers/hil/postgres_docker
+#    - name: pull bolted repo from github
+#      become: yes
+#      become_user: root
+#      git:
+#        repo: https://github.com/BU-NU-CLOUD-SP18/Secure-Cloud-Automated-Deployment.git
+#        dest: /home/centos/bolted
+#        clone: yes
 
-    - name: run postgres hil database image 
+    - name: copy hil installation file to remote vm
       become: yes
       become_user: root
-      command: docker run -itd --name hil_database hil_postgres:latest
-      args:
-        chdir: /home/centos/bolted/containers/hil/postgres_docker
+      copy:
+        src: ../containers/hil
+        dest: /home/
+
+    - name: copy centos http docker file to remote vm
+      become: yes
+      become_user: root
+      copy:
+        src: ../containers/httpd
+        dest: /home/
+ 
+##################################
+# Hil database server  deployemnt 
+##################################
+ 
+#    - name: build hil database image from docker hub
+#      become: yes
+#      become_user: root
+#      command: docker build --rm -t hil_postgres:latest .   
+#      args:
+#        chdir: /home/centos/bolted/containers/hil/postgres_docker
+
+    - name: build hil databse image from docker hub postgres image
+      become: yes
+      bcomee_user: root
+      docker_image:
+        name: hil_postgres
+        tag: latest
+        path: /home/hil/postgres_docker
+        push: no
+
+#    - name: run postgres hil database image 
+#      become: yes
+#      become_user: root
+#      command: docker run -itd --name hil_database hil_postgres:latest
+#      args:
+#        chdir: /home/centos/bolted/containers/hil/postgres_docker
+
+    - name: run hil postgres database container
+      become: yes
+      become_user: root
+      docker_container:
+        name: hil_database
+        image: hil_postgres:latest
+        state: started
+        pull: no
+        interactive: yes
+        tty: yes
+        detach: yes
+
+##################################
+# Hil server deployment
+##################################
 
     - name: store the postgresql database ip to variable
       become: yes
@@ -35,14 +78,20 @@
       register: output
 
     - name: display postgresql database ip address
-      debug: msg ="{{ output.stdout }}"
+      debug: msg = "The ip address of hil database is {{ output.stdout }}"
 
     - name: create centos apache httpd image
       become: yes
       become_user: root
       command: docker build --rm -t httpd:latest .
       args:
-        chdir: /home/centos/bolted/containers/httpd_centos/
+        chdir: /home/httpd/
+
+#    - name: pull hil network server image
+#      become: yes
+#      become_user: root
+#      docker_image:
+#        name: leonjia0112/hil_apache:latest
 
 #    - name: modify the hil.cfg file with updated 
 #      command: /bin/bash database_ip.sh {{ output.stdout }}
@@ -54,7 +103,7 @@
       become_user: root
       command: docker build --rm -t  hil_apache:latest .
       args:
-        chdir: /home/centos/bolted/containers/hil/apache_docker
+        chdir: /home/hil/apache_docker
 
     - name: run hil apache server docker file
       become: yes
