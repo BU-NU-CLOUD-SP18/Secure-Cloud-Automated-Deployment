@@ -19,7 +19,9 @@ Configured each components’ connection based on the Bolted system schematics t
 ## Background
 
 The prevalence of public cloud offerings at various level including infrastructure, platform and software as a service have drawn much of the public’s attention to their security issues. Whereas most IaaS providers may have realized the imperative nature of this public concern, they are relatively indifferent to this aspect since the access to sensitive data is only limited to their own employees. This notion, however, can not be applied to a generally-defined public cloud where customers seek the privilege to secure their own data. On the premise of this demand, bolted system is proposed to serve those customers with higher security concerns.
-![alt text](https://github.com/BU-NU-CLOUD-SP18/Secure-Cloud-Automated-Deployment.git/docs/bolted_architecture.png "Bolted System Architecture")
+
+
+![alt text](https://github.com/BU-NU-CLOUD-SP18/Secure-Cloud-Automated-Deployment/blob/master/docs/bolted_architecture.png "Bolted System Architecture")
 
 
 ## Bolted System Skeleton
