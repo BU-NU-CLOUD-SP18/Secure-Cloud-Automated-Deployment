@@ -26,10 +26,61 @@ Another feature it that the tenant or client can choose the location for those c
 
 To implement this, the project uses kubernetes containers as the installation media or environment instead of a VM. The reason is because a container is convenient and portable as we think about the project requirement. 
 
-## Acceptance Criteria (MVP)
+## Installation Guide (current release 0.1)
+To install bolted system on a cloud platform, first the cloud needs to meet the system requirement. Once the system requirement is met, configure the `bolted.cfg` configuration file based on the system based on user cloud platform. Then run `setup.py` to install all the component automatically.
 
-An ansible playbook that is executable which can install and automate the process of installation of HIL, BMI, Keylime and the orchestration engine on the provider’s cloud environment. Our system should deliver a model that facilitates communication using containers implemented on all these components so as to facilitate communication amongst them  Now, separate installation and configuration of each component is not required.
+#### System Requirement
+The current release require the system meet those requirements:
+* All the node are virtual machine runs centos7
+* All the node are under the same subnet that can communicate with each other
+* All the node should include the admin machine public key for `ssh` accessing
 
+
+#### Configuration File
+Here is a sample of configuration file `bolted.cfg`, user should change the item insider the configuration file to install the component based on the item detail.
+```
+# ip address of where the server locate
+[serverip]
+hil=10.0.0.10
+bmi=10.0.0.14
+keylime-server=10.0.0.9
+
+# for teasting purpose, keylime client is integrated with all other server to deploy together
+keylime-client=10.0.0.13
+
+# bmi configuration parameter
+[bmi]
+uid = bmi-sec        
+service = true           
+
+[fs]
+id = admin       
+pool = bmi                   
+conf_file = ceph.conf           
+keyring = ceph.client.admin.keyring
+```
+
+#### Installation Program
+Once the configuration file has been setup based on user's environment, user is not able to install the Bolted System by running the installation program. First add the public key (if used password) to bash, which can avoid type password during the installation process.
+```
+$ ssh-agent bash
+$ ssh-add ~/.ssh/id_rsa
+```
+Once user have input the public key password, user is not able to run the installation program to install the system.
+```
+$ python setup.py install
+```
+
+## Release
+#### release v0.1 (4/30/2018 current release)
+This release contains the following feature items:
+* Containerize all the system componont using docker
+* Deploy all the services inside containers on seperate machines
+* Auto deploy all the components on virtual machine platform for user
+* Customizable configuration setup file for easy install
+* Ansible playbook script for reliable component deployment manegement
+* Automated install program
+* Auto configure user virtual machine envrionment to meet system dependencies
 
 ## Mass Open Cloud
 This project is part of the larger [Mass Open Cloud](https://massopen.cloud/).
