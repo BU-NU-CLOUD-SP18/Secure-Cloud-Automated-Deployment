@@ -8,7 +8,6 @@ Bolted System container the following componoents:
 * Orchestration Engine (node deployment engine)
 
 Here are the link to view full detail of each component: [HIL](https://github.com/CCI-MOC/hil), [BMI](https://github.com/CCI-MOC/ims), [Keylime](https://github.com/mit-ll/python-keylime)
-
 To view the documentation of the system, checkout [Bolted Summery](docs)
 
 ## Documentation
