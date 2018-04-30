@@ -27,6 +27,7 @@ sudo docker attach bmi_image
 Then you are free to type any BMI interaction command you need.
 
 > Manage project in BMI
+
 In BMI, you are supposed to create mutiple project to store images of different kinds.
 By default, the automation script already creates a project for your named "project". You can check it by typing:
 ```
@@ -39,6 +40,7 @@ bmi project create <project name>
 ```
 
 > Manage images on ceph
+
 You can check the connection between the BMI and your customized ceph server by typing the following command:
 ```
 bmi db ls
