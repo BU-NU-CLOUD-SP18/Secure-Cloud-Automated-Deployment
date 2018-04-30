@@ -20,13 +20,6 @@
       copy:
         src: ../containers/hil
         dest: /home/
-
-    - name: copy centos http docker file to remote vm
-      become: yes
-      become_user: root
-      copy:
-        src: ../containers/httpd
-        dest: /home/
  
 ##################################
 # Hil database server  deployemnt 
@@ -80,33 +73,56 @@
     - name: display postgresql database ip address
       debug: msg = "The ip address of hil database is {{ output.stdout }}"
 
-    - name: create centos apache httpd image
-      become: yes
-      become_user: root
-      command: docker build --rm -t httpd:latest .
-      args:
-        chdir: /home/httpd/
+#   - name: create centos apache httpd image
+#     become: yes
+#     become_user: root
+#     command: docker build --rm -t httpd:latest .
+#     args:
+#       chdir: /home/httpd/
 
-#    - name: pull hil network server image
-#      become: yes
-#      become_user: root
-#      docker_image:
-#        name: leonjia0112/hil_apache:latest
+#   - name: pull hil network server image
+#     become: yes 
+#     become_user: root
+#     docker_image:
+#       name: leonjia0112/hil_apache:latest
 
 #    - name: modify the hil.cfg file with updated 
 #      command: /bin/bash database_ip.sh {{ output.stdout }}
 #      args:
 #        chdir: /home/centos/bolted/containers/hil/
 
+#    - name: build hil apache server docker file
+#      become: yes
+#      become_user: root
+#      command: docker build --rm -t  hil_apache:latest .
+#      args:
+#        chdir: /home/hil/apache_docker_prebuild
+
     - name: build hil apache server docker file
       become: yes
       become_user: root
-      command: docker build --rm -t  hil_apache:latest .
-      args:
-        chdir: /home/hil/apache_docker
+      docker_image:
+        path: /home/hil/apache_docker_prebuild
+        name: hil_apache_pre
+        tag: latest
+        push: no
+        buildargs:
+          DATABASE_IP: {{ output.stdout }}
 
-    - name: run hil apache server docker file
+#    - name: run hil apache server contain
+#      become: yes
+#      beomce_user: root
+#      command: docker run -itd --name hil_server hil_apache:latest  
+
+    - name: run hil apache server contaiener
       become: yes
-      beomce_user: root
-      command: docker run -itd --name hil_server hil_apache:latest  
-
+      become_user: root
+      docker_container:
+        name: hil_server
+        image: hil_apache_pre:latest
+        state: started
+        pull: no
+        interactive: yes
+        tty: yes
+        detach: yes
+        
