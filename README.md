@@ -9,22 +9,14 @@ Bolted System container the following componoents:
 
 Here are the link to view full detail of each component: [HIL](https://github.com/CCI-MOC/hil), [BMI](https://github.com/CCI-MOC/ims), [Keylime](https://github.com/mit-ll/python-keylime)
 
-To view the documentation of the system, checkout [Bolted_doc](docs)
+To view the documentation of the system, checkout [Bolted Summery](docs)
 
-## Product List
+## Documentation
 For this repo, user can use the following item of bolted:
-* Installation guide of each system componet and its reference. ([hil_guide](installation_guide/hil), [bmi_guide](installation_guide/bmi), [keylime_guide](installation_guide/keylime))
-* Docker container image building Dockerfile and instruction. ([hil_image](containers/hil), [bmi_image](containers/bmi), [keylime_image](containers/keylime))
-* Ansible playbook deployment script. ([ansible](ansible))
+* Installation guide of each system componet and its reference. ([HIL Install](installation_guide/hil), [BMI Install](installation_guide/bmi), [Keylime Install](installation_guide/keylime))
+* Docker container image building Dockerfile and instruction. ([HIL Image](containers/hil), [BMI Image](containers/bmi), [Keylime Image](containers/keylime))
+* Ansible playbook deployment script. ([Ansible](ansible))
 * Automated installation program.
-
-## Project Features and Solution
-
-For this project, the features included are the following:
-It allows the provider to install and configure the Bolted system without worrying about installation and configuration process for each component individually. 
-Another feature it that the tenant or client can choose the location for those component, and they can even move the application to a different location even after they have installed it the first time.
-
-To implement this, the project uses kubernetes containers as the installation media or environment instead of a VM. The reason is because a container is convenient and portable as we think about the project requirement. 
 
 ## Installation Guide (current release 0.1)
 To install bolted system on a cloud platform, first the cloud needs to meet the system requirement. Once the system requirement is met, configure the `bolted.cfg` configuration file based on the system based on user cloud platform. Then run `setup.py` to install all the component automatically.
