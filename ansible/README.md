@@ -2,7 +2,7 @@
 
 Ansible is software that automates software provisioning, configuration management, and application deployment. In this project we fouce on mange software on top of hardware. Anisble has several features:
 
-- Agentlss
+- Agentless
 - Build on top of Python
 - Use ssh for secure connection
 - push based architecture
