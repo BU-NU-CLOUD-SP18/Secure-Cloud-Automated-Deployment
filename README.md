@@ -11,12 +11,12 @@ Here are the link to view full detail of each component: [HIL](https://github.co
 
 To view the documentation of the system, checkout [Bolted_doc](docs)
 
-## Project Goal Includes:
-
-Provide an executable script, ansible playbook, for the provider that automatically installs and configures all components in this cloud deployment system.
-Design an automated method to install each component on tenant’s environment
-Configured each components’ connection based on the Bolted system schematics to allow interconnection and communication across each component.
-
+## Product List
+For this repo, user can use the following item of bolted:
+* Installation guide of each system componet and its reference. ([hil_guide](installation_guide/hil), [bmi_guide](installation_guide/bmi), [keylime_guide](installation_guide/keylime))
+* Docker container image building Dockerfile and instruction. ([hil_image](containers/hil), [bmi_image](containers/bmi), [keylime_image](containers/keylime))
+* Ansible playbook deployment script. ([ansible](ansible))
+* Automated installation program.
 
 ## Project Features and Solution
 
