@@ -59,6 +59,7 @@ To implement this, the project uses kubernetes containers as the installation me
 
 An ansible playbook that is executable which can install and automate the process of installation of HIL, BMI, Keylime and the orchestration engine on the provider’s cloud environment. Our system should deliver a model that facilitates communication using containers implemented on all these components so as to facilitate communication amongst them  Now, separate installation and configuration of each component is not required.
 
+![alt text](https://github.com/BU-NU-CLOUD-SP18/Secure-Cloud-Automated-Deployment/blob/master/docs/user_case.png "User Case" )
 
 ## Mass Open Cloud
 
