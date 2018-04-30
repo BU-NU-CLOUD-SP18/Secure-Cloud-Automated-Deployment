@@ -2,24 +2,30 @@
 - hosts: keylime-server
   tasks:
 
-    - name: clone repo to directory
-      become: yes
-      become_user: root
-      git:
-        repo: https://github.com/BU-NU-CLOUD-SP18/Secure-Cloud-Automated-Deployment.git
-        dest: /home/centos/bolted
-        clone: yes
+#    - name: clone repo to directory
+#      become: yes
+#      become_user: root
+#      git:
+#        repo: https://github.com/BU-NU-CLOUD-SP18/Secure-Cloud-Automated-Deployment.git
+#        dest: /home/centos/bolted
+#        clone: yes
 
 #    - name: install docker py module
 #      command: pip install docker-py
 
-    - name: build keylime server docker image
+#    - name: build keylime server docker image
+#      become: yes
+#      become_user: root
+#      command: docker build -t keylime:latest .
+#      args:
+#        chdir: /home/centos/bolted/containers/keylime
+
+    - name: pull keylime server image from docker hub
       become: yes
       become_user: root
-      command: docker build -t keylime:latest .
-      args:
-        chdir: /home/centos/bolted/containers/keylime
-
+      docker_image:
+        name: leonjia0112/keylime:first
+        
 #    - name: build keylime server docker image
 #      docker_image:
 #        path: /home/centos/bolted/containers/keylime
@@ -44,7 +50,7 @@
       become_user: root
       docker_container:
         name: keylime-server
-        image: keylime
+        image: leonjia0112/keylime:first
         state: started
         pull: no
         interactive: yes
