@@ -13,7 +13,7 @@ To view the documentation of the system, checkout [Bolted Summery](docs)
 
 ## Documentation
 For this repo, user can use the following item of bolted:
-* Installation guide of each system componet and its reference. ([HIL Install](installation_guide/hil), [BMI Install](installation_guide/bmi), [Keylime Install](installation_guide/keylime))
+* Installation guide of each system componet and its reference. ([HIL Install](installation_guide/hil-install), [BMI Install](installation_guide/bmi-install), [Keylime Install](installation_guide/keylime-install))
 * Docker container image building Dockerfile and instruction. ([HIL Image](containers/hil), [BMI Image](containers/bmi), [Keylime Image](containers/keylime))
 * Ansible playbook deployment script. ([Ansible](ansible))
 * Automated installation program.
