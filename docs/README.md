@@ -22,7 +22,7 @@ The prevalence of public cloud offerings at various level including infrastructu
 
 
 #### Bolted System Skeleton
-![](https://github.com/BU-NU-CLOUD-SP18/Secure-Cloud-Automated-Deployment/blob/master/docs/bolted_architecture.png | width=200)
+<img src="https://github.com/BU-NU-CLOUD-SP18/Secure-Cloud-Automated-Deployment/blob/master/docs/bolted_architecture.png" alt="alt text" width="200">
 
 This picture represents the flow of events. The nodes are isolated with respect to their requirements and then moves the node into airlock state. There is an attestation test that takes place to compare the image with a white list and if it passes, then the node is forwarded to the tenant enclave, otherwise the node is passed on to the rejected pool.
 
