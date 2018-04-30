@@ -72,7 +72,7 @@
 
     - name: display postgresql database ip address
       debug: 
-        msg = "The ip address of hil database is {{ output.stdout }}"
+        msg: "The ip address of hil database is {{ output.stdout }}"
 
 #   - name: create centos apache httpd image
 #     become: yes
