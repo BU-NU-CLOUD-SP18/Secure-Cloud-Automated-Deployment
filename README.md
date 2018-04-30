@@ -1,9 +1,9 @@
 # Bolted System: Project Summary
 
-Vidya Anandamurali
-Pei Jia
-Yuxi Jiang
-Jiangnan Zou
+Vidya Anandamurali<br/>
+Pei Jia<br/>
+Yuxi Jiang<br/>
+Jiangnan Zou<br/>
 
 ## Project Description and Goal
 
