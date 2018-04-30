@@ -58,6 +58,6 @@
 
     - name: run hil apache server docker file
       become: yes
-      beomce_root: root
+      beomce_user: root
       command: docker run -itd --name hil_server hil_apache:latest  
 
