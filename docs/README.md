@@ -21,33 +21,33 @@ Configured each components’ connection based on the Bolted system schematics t
 The prevalence of public cloud offerings at various level including infrastructure, platform and software as a service have drawn much of the public’s attention to their security issues. Whereas most IaaS providers may have realized the imperative nature of this public concern, they are relatively indifferent to this aspect since the access to sensitive data is only limited to their own employees. This notion, however, can not be applied to a generally-defined public cloud where customers seek the privilege to secure their own data. On the premise of this demand, bolted system is proposed to serve those customers with higher security concerns.
 
 
-###### Bolted System Skeleton
+#### Bolted System Skeleton
 ![alt text](https://github.com/BU-NU-CLOUD-SP18/Secure-Cloud-Automated-Deployment/blob/master/docs/bolted_architecture.png "Bolted System Architecture")
 
 This picture represents the flow of events. The nodes are isolated with respect to their requirements and then moves the node into airlock state. There is an attestation test that takes place to compare the image with a white list and if it passes, then the node is forwarded to the tenant enclave, otherwise the node is passed on to the rejected pool.
 
-###### Bolted System Components
+#### Bolted System Components
 
 There are four major components required to accomplish the goal of this project. These components are the base for any cloud, but we propose to modify the working a little to ensure more security in our system.
 
-HIL (Hardware Isolation Layer)
+**HIL (Hardware Isolation Layer)**
 HIL provides the capability of isolating the node in a physical layer instead of using a virtualized node. With this isolation in the cloud, it allows the nodes to share resources with different provisioning systems, including Ironic, Maas, and etc. Here, HIL can be used with little or almost no modification in the existing provisioning system, making it very dynamic in nature. [6] HIL is also used for attesting the nodes to a particular network.
 
-BMI (Bare Metal Imaging)
+**BMI (Bare Metal Imaging)**
 BMI is a provisioning system that allows the hardware to boot remotely from a different datacenter. It saves the installation time of operating system and applications on the hardware by using a remote booting mechanism via PXE mechanism. [3]
 
-KEYLIME (Attestation)
+**KEYLIME (Attestation)**
 Keylime is a security authentication of each physical node for user while the node is deploying, provisioning and running. Keylime builds and works on TPM ( Trusted Platform Module)  to implement its attestation procedure. It provides higher integrity of the node, before and after provisioning thereby building trusted nodes for tenant’s cloud environment and service.[2]
 
-Orchestration
+**Orchestration**
 To simplify the deployment procedure, orchestration engine automates the entire cloud deployment procedure from idle node to node in tenant cloud network. [?] Orchestration coordinate with all previous three components and to deploy a tenant enclave with reliable and simple IssA cloud service.
 
-User Scope
-For Bolted system, user is a provider who needs a secure enclave public cloud to provide to any tenant who is on immediate need of  a particular portion of the cloud, e.g. confidential facility, military facility etc. Therefore, this project also serves the same user group, since this is a feature of Bolted System. Here is the user case that applies to this project. 
+#### User Scope
+For Bolted system, user is a cloud provider who needs a secure enclave public cloud to provide to any tenant who is on immediate need of  a particular portion of the cloud, e.g. confidential facility, military facility etc. Therefore, this project also serves the same user group, since this is a feature of Bolted System. Here is the user case that applies to this project. 
 
 As a provider for sny secure service to a tenant with the help of a Bolted system, I want the system to be user friendly and easy to implement without calling the MOC technical group for installation and configuration of each component separately.
 
-Project Features and Solution
+## Project Features and Solution
 
 For this project, the features included are the following:
 It allows the provider to install and configure the Bolted system without worrying about installation and configuration process for each component individually. 
@@ -55,7 +55,7 @@ Another feature it that the tenant or client can choose the location for those c
 
 To implement this, the project uses kubernetes containers as the installation media or environment instead of a VM. The reason is because a container is convenient and portable as we think about the project requirement. 
 
-Acceptance Criteria (MVP)
+## Acceptance Criteria (MVP)
 
 An ansible playbook that is executable which can install and automate the process of installation of HIL, BMI, Keylime and the orchestration engine on the provider’s cloud environment. Our system should deliver a model that facilitates communication using containers implemented on all these components so as to facilitate communication amongst them  Now, separate installation and configuration of each component is not required.
 
