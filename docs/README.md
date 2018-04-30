@@ -22,9 +22,9 @@ The prevalence of public cloud offerings at various level including infrastructu
 
 
 #### Bolted System Skeleton
-<img src="https://github.com/BU-NU-CLOUD-SP18/Secure-Cloud-Automated-Deployment/blob/master/docs/bolted_architecture.png" alt="alt text" width="200">
-
 This picture represents the flow of events. The nodes are isolated with respect to their requirements and then moves the node into airlock state. There is an attestation test that takes place to compare the image with a white list and if it passes, then the node is forwarded to the tenant enclave, otherwise the node is passed on to the rejected pool.
+
+<img src="https://github.com/BU-NU-CLOUD-SP18/Secure-Cloud-Automated-Deployment/blob/master/docs/bolted_architecture.png" alt="alt text" width="500">
 
 #### Bolted System Components
 
@@ -59,7 +59,7 @@ To implement this, the project uses kubernetes containers as the installation me
 
 An ansible playbook that is executable which can install and automate the process of installation of HIL, BMI, Keylime and the orchestration engine on the provider’s cloud environment. Our system should deliver a model that facilitates communication using containers implemented on all these components so as to facilitate communication amongst them  Now, separate installation and configuration of each component is not required.
 
-![alt text](https://github.com/BU-NU-CLOUD-SP18/Secure-Cloud-Automated-Deployment/blob/master/docs/user_case.png "User Case" )
+<img src="https://github.com/BU-NU-CLOUD-SP18/Secure-Cloud-Automated-Deployment/blob/master/docs/user_case.png" alt="alt text" width="500">
 
 ## Mass Open Cloud
 
