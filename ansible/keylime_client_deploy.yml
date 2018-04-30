@@ -13,7 +13,7 @@
     - name: update host ip address in keylime configuration file
       become: yes
       become_user: root
-      command: ./ip_setup.sh {{ keylimeserverip }}
+      command: ./ip_setup.sh {{ myip }}
       args:
         chdir: /home/centos/bolted/containers/keylime
 
