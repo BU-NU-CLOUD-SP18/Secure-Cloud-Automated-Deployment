@@ -62,10 +62,10 @@ An ansible playbook that is executable which can install and automate the proces
 
 ## Mass Open Cloud
 
-This project is part of the larger `Mass Open Cloud
-<https://massopen.cloud/>`_. For a description of the team and other
-information, see
-`<https://github.com/CCI-MOC/moc-public/blob/master/README.md>`_.
+This project is part of the larger [Mass Open Cloud](https://massopen.cloud/).
+
+For a description of the team and other information, see
+https://github.com/CCI-MOC/moc-public/blob/master/README.md
 
 ## References
 [1] Jason Hennessey , Sahil Tikale , Ata Turk , Emine Ugur Kaynar , Chris Hill , Peter Desnoyers , Orran Krieger, HIL: Designing an Exokernel for the Data Center, Proceedings of the Seventh ACM Symposium on Cloud Computing, October 05-07, 2016, Santa Clara, CA, USA
