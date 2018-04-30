@@ -1,4 +1,4 @@
->Introduction
+## Introduction
 
 Ansible is software that automates software provisioning, configuration management, and application deployment. In this project we fouce on mange software on top of hardware. Anisble has several features:
 
@@ -10,7 +10,7 @@ Ansible is software that automates software provisioning, configuration manageme
  
 In this project, we wrote ansible-playbook and run it on the host machines.
 
-> Anisble installation
+## Anisble installation
 
 As we need install ansible on VMs which based on CentOS, we could not use sudo pip. However, on RedHat/CentOS systems python-pip and ansible are available via the EPEL repository.
 
@@ -35,7 +35,7 @@ Test ansible version and finish installation.
 $ ansible --version
 ```
 
->Ansible configuration and host/server allocation
+## Ansible configuration and host/server allocation
 
 Ansible uses an inventory file (basically, a list of servers) to communicate with servers.  Like a hosts file (at /etc/hosts) that matches IP addresses to domain names, an Ansible inventory file matches servers (IP addresses or domain names) to groups. Create a file at /etc/ansible/hosts (the default location for Ansible’s inventory file), and add one server to it.
 ```sh
@@ -72,7 +72,7 @@ $ ansible all -m ping
 ```
 If it could connect successfully we could continue writing and running ansible playbooks.
 
->Write Ansible playbook and run it on the hosts
+## Write Ansible playbook and run it on the hosts
 
 Playbooks are Ansible’s configuration, deployment, and orchestration language. They can describe a policy you want your remote systems to enforce, or a set of steps in a general IT process. Using ansible playbook to manage virtual machines and allocate resource will simplify the stpes in our project. Ansible playbook is written in YMAL file. There are three ansible playbooks in this folder which could achieve the goal of install docker, install HIL and install BMI in all the hosts which we added to the /ansible/hosts file.
 
