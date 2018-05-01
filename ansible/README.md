@@ -14,7 +14,7 @@ In this project, we wrote ansible-playbook and run it on the host machines.
 
 As we need install ansible on VMs which based on CentOS, we could not use sudo pip. However, on RedHat/CentOS systems python-pip and ansible are available via the EPEL repository.
 
-To install ansible fistly access to the root.
+To install ansible we first require root access.
 ```sh
 $ suso su -
 ```
