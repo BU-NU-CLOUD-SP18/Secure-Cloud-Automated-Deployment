@@ -108,7 +108,7 @@
         tag: latest
         push: no
         buildargs:
-          DATABASE_IP: {{ output.stdout }}
+          DATABASE_IP: "{{ output.stdout }}"
 
 #    - name: run hil apache server contain
 #      become: yes
