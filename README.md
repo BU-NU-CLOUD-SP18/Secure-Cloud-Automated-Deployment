@@ -20,7 +20,7 @@ For this repo, user can use the following item of bolted:
 
 ## Installation Guide (current release 0.1)
 To install bolted system on a cloud platform, first the cloud needs to meet the system requirement. Once the system requirement is met, go through the following steps to configure installation.
-1. Configure the `bolted.cfg` configuration file based on the system based on user cloud platform. 
+1. Configure the `bolted.cfg` configuration file based on the user cloud platform. 
 2. Obtain your Ceph configuration files (Usually under the path `/etc/ceph` on your Ceph server) and place them in the folder "ceph_keyring". An example already exists in this folder for your reference. Make sure you replace them with your own files.
 3. Run `setup.py` to install all the component automatically.
 
