@@ -1,6 +1,6 @@
 FROM centos/systemd
 
-MAINTAINER Jiangnan_Zou
+MAINTAINER Jiangnan_Zou(jalonzou@gmail.com)
 
 # Create user and remove password for root
 RUN useradd -ms /bin/bash bmi
