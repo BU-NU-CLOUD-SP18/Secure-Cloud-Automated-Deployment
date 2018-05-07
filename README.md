@@ -25,7 +25,7 @@ To install bolted system on a cloud platform, first the cloud needs to meet the 
 3. Run `setup.py` to install all the component automatically.
 
 #### System Requirement
-The current release require the system meet those requirements:
+The current release requires the system to meet the following requirements:
 * All the nodes are virtual machine running centos7
 * All the nodes are under the same subnet that can communicate with each other
 * All the nodes should include the admin machine public key for `ssh` accessing
@@ -56,12 +56,12 @@ keyring = ceph.client.admin.keyring
 ```
 
 #### Installation Program
-Once the configuration file has been setup based on user's environment, user is not able to install the Bolted System by running the installation program. First add the public key (if used password) to bash, which can avoid type password during the installation process.
+Once the configuration file has been setup based on user's environment, user is now able to install the Bolted System by running the installation program. First add the public key (if used password) to bash, which can avoid typing password during the installation process.
 ```
 $ ssh-agent bash
 $ ssh-add ~/.ssh/id_rsa
 ```
-Once the user has the input, the public key password, user is not able to run the installation program to install the system.
+Once the user has the input, the public key password, user is now able to run the installation program to install the system.
 ```
 $ python setup.py install
 ```
